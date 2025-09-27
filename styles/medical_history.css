@@ -1,0 +1,70 @@
+body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.5;
+    }
+    fieldset {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    legend {
+      font-weight: bold;
+      padding: 0 8px;
+    }
+    label {
+      display: block;
+      margin-top: 8px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .inline {
+      display: inline-block;
+      margin-right: 15px;
+    }
+
+
+body{
+    margin: 0;
+    padding: 0;
+}
+nav {
+    background-color: rgba(14, 70, 181, 0.729);
+    padding: 0.5rem;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+nav ul a{
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: black;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.2rem;
+}
+
+nav ul a:hover {
+    color: rgb(48, 48, 48);
+}
+
+.content-wrapper{
+    padding: 1.5rem;
+}

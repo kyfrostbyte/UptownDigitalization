@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Uptown Digitalization</title>
+        <link href="styles/medical_history.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="nav-wrapper">
+            <nav>
+                <ul>
+                    <a href="index.html">Home</a>
+                    <a href="medical_history.html">Medical History</a>
+                    <a href="purchase_agreement.html">Purchase Agreement</a>
+                    <a href="skin_type_assement.html">Skin Type Assessment</a>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content-wrapper">
+            <h1>Medical History</h1>
+            <form>
+                <!-- Patient Information -->
+                <fieldset>
+                <legend>Patient Information</legend>
+                <label>Name: <input type="text" name="name"></label>
+                <label>Date: <input type="date" name="date"></label>
+                <label>Preferred Name: <input type="text" name="preferred_name"></label>
+                <label>Birthdate: <input type="date" name="birthdate"></label>
+                <label>Cell Phone: <input type="tel" name="cell_phone"></label>
+                <label>Email: <input type="email" name="email"></label>
+                <label>Home Address: <input type="text" name="home_address"></label>
+                <label>City: <input type="text" name="city"></label>
+                <label>State: <input type="text" name="state"></label>
+                <label>Zip: <input type="text" name="zip"></label>
+                <label>Occupation: <input type="text" name="occupation"></label>
+                <label>Business Phone: <input type="tel" name="business_phone"></label>
+                <label>
+                    Gender:
+                    <span class="inline"><input type="radio" name="gender" value="male"> Male</span>
+                    <span class="inline"><input type="radio" name="gender" value="female"> Female</span>
+                    <span class="inline"><input type="radio" name="gender" value="other"> Other</span>
+                </label>
+                <label>Preferred Pronouns: <input type="text" name="pronouns"></label>
+                </fieldset>
+
+                <!-- Emergency Contact -->
+                <fieldset>
+                <legend>Emergency Contact</legend>
+                <label>Name: <input type="text" name="emergency_name"></label>
+                <label>Phone: <input type="tel" name="emergency_phone"></label>
+                <label>Relationship: <input type="text" name="emergency_relationship"></label>
+                <label>
+                    May we share medical info? 
+                    <span class="inline"><input type="radio" name="share_info" value="yes"> Yes</span>
+                    <span class="inline"><input type="radio" name="share_info" value="no"> No</span>
+                </label>
+                </fieldset>
+
+                <!-- Referral -->
+                <fieldset>
+                <legend>How did you hear about Uptown Laser?</legend>
+                <label><input type="checkbox" name="referral" value="google"> Google</label>
+                <label><input type="checkbox" name="referral" value="facebook"> Facebook</label>
+                <label><input type="checkbox" name="referral" value="instagram"> Instagram</label>
+                <label><input type="checkbox" name="referral" value="youtube"> YouTube</label>
+                <label><input type="checkbox" name="referral" value="radio"> Radio</label>
+                <label><input type="checkbox" name="referral" value="tv"> TV</label>
+                <label><input type="checkbox" name="referral" value="other"> Other: <input type="text" name="referral_other"></label>
+                <label>Friend/Family Member Name: <input type="text" name="referral_friend"></label>
+                <label>Physician Referral Name: <input type="text" name="referral_physician"></label>
+                </fieldset>
+
+                <!-- Contact Preferences -->
+                <fieldset>
+                <legend>Contact Preferences</legend>
+                <label>Preferred contact:
+                    <span class="inline"><input type="radio" name="contact_pref" value="phone"> Phone</span>
+                    <span class="inline"><input type="radio" name="contact_pref" value="email"> Email</span>
+                    <span class="inline"><input type="radio" name="contact_pref" value="text"> Text</span>
+                </label>
+                <label>
+                    Receive promotions?
+                    <span class="inline"><input type="radio" name="promotions" value="yes"> Yes</span>
+                    <span class="inline"><input type="radio" name="promotions" value="no"> No</span>
+                </label>
+                </fieldset>
+
+                <!-- Skin & Medical History -->
+                <fieldset>
+                <legend>Medical History</legend>
+                <label>General health:
+                    <span class="inline"><input type="radio" name="health" value="good"> Good</span>
+                    <span class="inline"><input type="radio" name="health" value="fair"> Fair</span>
+                    <span class="inline"><input type="radio" name="health" value="poor"> Poor</span>
+                </label>
+                <label>Major illness or hospitalization (last 5 years)? 
+                    <span class="inline"><input type="radio" name="hospitalized" value="yes"> Yes</span>
+                    <span class="inline"><input type="radio" name="hospitalized" value="no"> No</span>
+                </label>
+                <label>Please describe: <textarea name="illness_description"></textarea></label>
+                <label>Allergies/Sensitivities: <textarea name="allergies"></textarea></label>
+                <label>Medications: <textarea name="medications"></textarea></label>
+                <label>Topical Medications: <textarea name="topical_medications"></textarea></label>
+                <label>Reactions to topical medications: <textarea name="reactions"></textarea></label>
+                </fieldset>
+
+                <!-- Treatment Wish List -->
+                <fieldset>
+                <legend>Treatment Wish List</legend>
+                <label>1) <input type="text" name="wish1"></label>
+                <label>2) <input type="text" name="wish2"></label>
+                <label>3) <input type="text" name="wish3"></label>
+                <label>4) <input type="text" name="wish4"></label>
+                <label>5) <input type="text" name="wish5"></label>
+                <label>6) <input type="text" name="wish6"></label>
+                </fieldset>
+
+                <fieldset>
+                <legend>Signature</legend>
+                <label>Patient Signature: <input type="text" name="patient_signature"></label>
+                <label>Date: <input type="date" name="patient_signature_date"></label>
+                <label>Parent/Guardian (if under 18): <input type="text" name="guardian_signature"></label>
+                <label>Date: <input type="date" name="guardian_date"></label>
+                </fieldset>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
