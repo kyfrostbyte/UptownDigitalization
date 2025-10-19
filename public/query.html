@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SQLite Dev Page</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; }
+    h1 { margin-bottom: 20px; }
+    .section { margin-bottom: 25px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+    .section h2 { margin-top: 0; font-size: 1.2em; }
+    input { margin: 5px 5px 5px 0; padding: 5px; }
+    button { margin: 5px 5px 5px 0; padding: 5px 10px; }
+    table { border-collapse: collapse; margin-top: 10px; width: 100%; }
+    td, th { border: 1px solid #ccc; padding: 5px 10px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Users Database</h1>
+
+  <!-- Add User Section -->
+  <div class="section">
+    <h2>Add a New User</h2>
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <button onclick="addUser()">Add User</button>
+  </div>
+
+  <!-- User Lookup Section -->
+  <div class="section">
+    <h2>Lookup / Delete User by ID</h2>
+    <input id="userId" placeholder="User ID">
+    <button onclick="getUser()">Get User</button>
+    <button onclick="deleteUser()">Delete User</button>
+  </div>
+
+  <!-- List Users Section -->
+  <div class="section">
+    <h2>List All Users</h2>
+    <button onclick="listUsers()">Show All Users</button>
+  </div>
+
+  <!-- Output Section -->
+  <div id="output" class="section">
+    <h2>Results</h2>
+  </div>
+
+  <script>
+    function display(data) {
+      if (!data || (Array.isArray(data) && data.length === 0)) {
+        document.getElementById('output').innerHTML = "<p>No results</p>";
+        return;
+      }
+      if (!Array.isArray(data)) data = [data];
+
+      let html = "<table><tr>" + Object.keys(data[0]).map(k => `<th>${k}</th>`).join('') + "</tr>";
+      data.forEach(row => {
+        html += "<tr>" + Object.values(row).map(v => `<td>${v}</td>`).join('') + "</tr>";
+      });
+      html += "</table>";
+      document.getElementById('output').innerHTML = html;
+    }
+
+    function listUsers() {
+      fetch('/users').then(r => r.json()).then(display);
+    }
+
+    function addUser() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      fetch('/users', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({name,email})
+      })
+      .then(r => r.json())
+      .then(data => { alert("Inserted user ID: " + data.id); listUsers(); });
+    }
+
+    function getUser() {
+      const id = document.getElementById('userId').value;
+      if (!id) return alert("Please enter a User ID");
+      fetch('/users/' + id)
+        .then(r => r.json())
+        .then(display);
+    }
+
+    function deleteUser() {
+      const id = document.getElementById('userId').value;
+      if (!id) return alert("Please enter a User ID");
+      fetch('/users/' + id, { method: 'DELETE' })
+        .then(r => r.json())
+        .then(data => { alert("Deleted rows: " + data.deleted); listUsers(); });
+    }
+
+    // initial load
+    listUsers();
+  </script>
+</body>
+</html>

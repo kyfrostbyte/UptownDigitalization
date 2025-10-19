@@ -1,0 +1,24 @@
+<form id="form-selector">
+  <label><input type="checkbox" value="form1"> Form 1</label>
+  <label><input type="checkbox" value="form2"> Form 2</label>
+  <label><input type="checkbox" value="form3"> Form 3</label>
+  <button type="submit">Send Link</button>
+</form>
+
+<p id="link"></p>
+
+<script>
+document.getElementById('form-selector').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const forms = Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map(cb => cb.value);
+
+  const res = await fetch('http://localhost:3000/generate-link', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ forms })
+  });
+
+  const data = await res.json();
+  document.getElementById('link').textContent = `Client link: ${data.link}`;
+});
+</script>

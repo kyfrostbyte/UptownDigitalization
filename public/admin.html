@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - Send Forms</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    td, th { border: 1px solid #ccc; padding: 5px 10px; }
+    input { margin: 5px 5px 5px 0; padding: 5px; }
+    button { margin: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Admin - Send Forms</h1>
+
+  <h2>Add Client</h2>
+  <input id="first_name" placeholder="First Name">
+  <input id="last_name" placeholder="Last Name">
+  <input id="email" placeholder="Email">
+  <input id="phone" placeholder="Phone">
+  <button onclick="addClient()">Add Client</button>
+
+  <h2>Clients</h2>
+  <div id="clients"></div>
+
+  <h2>Send Forms</h2>
+  <div>
+    <label>Form Names (comma separated):</label>
+    <input id="form_names" placeholder="Form1, Form2">
+    <button onclick="sendForms()">Send Forms</button>
+  </div>
+
+  <div id="link"></div>
+
+<script>
+let selectedClient = null;
+
+function loadClients() {
+  fetch('/clients')
+    .then(res => res.json())
+    .then(clients => {
+      const html = `<table>
+        <tr><th>Select</th><th>ID</th><th>Name</th><th>Email</th><th>Token</th></tr>
+        ${clients.map(c => `<tr>
+          <td><input type="radio" name="client" value="${c.id}" onclick="selectClient(${c.id}, '${c.token}')"></td>
+          <td>${c.id}</td>
+          <td>${c.first_name} ${c.last_name}</td>
+          <td>${c.email}</td>
+          <td>${c.token}</td>
+        </tr>`).join('')}
+      </table>`;
+      document.getElementById('clients').innerHTML = html;
+    });
+}
+
+function selectClient(id, token) {
+  selectedClient = {id, token};
+}
+
+function addClient() {
+  const first_name = document.getElementById('first_name').value;
+  const last_name = document.getElementById('last_name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+
+  fetch('/clients', {
+    method:'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({first_name,last_name,email,phone})
+  })
+  .then(res=>res.json())
+  .then(()=> loadClients());
+}
+
+function sendForms() {
+  if (!selectedClient) return alert("Select a client first!");
+  const names = document.getElementById('form_names').value.split(',').map(s=>s.trim());
+  if (names.length === 0) return alert("Enter form names");
+
+  fetch(`/forms/${selectedClient.id}`, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({names})
+  })
+  .then(res=>res.json())
+  .then(() => {
+    document.getElementById('link').innerHTML =
+      `<p>Link to send to client: <a href="/client/${selectedClient.token}" target="_blank">
+      /client/${selectedClient.token}</a></p>`;
+  });
+}
+
+// Initial load
+loadClients();
+</script>
+</body>
+</html>

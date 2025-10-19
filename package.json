@@ -1,0 +1,28 @@
+{
+  "name": "uptowndigitalization",
+  "version": "1.0.0",
+  "description": "## Table of Contents - [Overview](#overview) - [Features](#features)   - [Client Intake Form](#1-client-intake-form)   - [Electronic Health Records (EHR) Management System](#2-electronic-health-records-ehr-management-system) - [Technical Stack](#technical-stack) - [Goals](#goals) - [Roadmap](#roadmap) - [Future Enhancements](#future-enhancements)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyfrostbyte/UptownDigitalization.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyfrostbyte/UptownDigitalization/issues"
+  },
+  "homepage": "https://github.com/kyfrostbyte/UptownDigitalization#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "nanoid": "^5.1.6",
+    "sqlite3": "^5.1.7",
+    "uuid": "^13.0.0"
+  }
+}

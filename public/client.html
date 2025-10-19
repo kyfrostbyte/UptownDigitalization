@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client Forms</title>
+</head>
+<body>
+  <h1>Forms to Sign</h1>
+  <div id="forms"></div>
+
+<script>
+const token = window.location.pathname.split('/').pop();
+
+fetch(`/client/${token}`)
+  .then(res => res.json())
+  .then(data => {
+    const forms = data.forms;
+    if (forms.length === 0) {
+      document.getElementById('forms').innerText = "No forms assigned.";
+      return;
+    }
+    const html = `<ul>${forms.map(f=>`<li>${f.name}</li>`).join('')}</ul>`;
+    document.getElementById('forms').innerHTML = html;
+  });
+</script>
+</body>
+</html>
