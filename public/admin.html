@@ -1,97 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin - Send Forms</title>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { margin-top: 40px; }
+    label { display: block; margin: 5px 0 2px; }
+    input[type="text"], input[type="email"], input[type="tel"] { width: 250px; padding: 5px; margin-bottom: 10px; }
     table { border-collapse: collapse; width: 100%; margin-top: 10px; }
-    td, th { border: 1px solid #ccc; padding: 5px 10px; }
-    input { margin: 5px 5px 5px 0; padding: 5px; }
-    button { margin: 5px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f4f4f4; }
+    button { padding: 8px 12px; margin-top: 10px; cursor: pointer; }
   </style>
 </head>
 <body>
-  <h1>Admin - Send Forms</h1>
 
-  <h2>Add Client</h2>
-  <input id="first_name" placeholder="First Name">
-  <input id="last_name" placeholder="Last Name">
-  <input id="email" placeholder="Email">
-  <input id="phone" placeholder="Phone">
-  <button onclick="addClient()">Add Client</button>
+  <h1>Admin Panel</h1>
 
-  <h2>Clients</h2>
-  <div id="clients"></div>
+  <!-- Section: Add New Client -->
+  <h2>Add New Client</h2>
+  <form id="addClientForm">
+    <label>First Name</label>
+    <input type="text" name="first_name" required>
+    <label>Last Name</label>
+    <input type="text" name="last_name" required>
+    <label>Email</label>
+    <input type="email" name="email" required>
+    <label>Phone</label>
+    <input type="tel" name="phone" required>
+    <button type="submit">Add Client</button>
+  </form>
 
-  <h2>Send Forms</h2>
-  <div>
-    <label>Form Names (comma separated):</label>
-    <input id="form_names" placeholder="Form1, Form2">
-    <button onclick="sendForms()">Send Forms</button>
-  </div>
+  <h3>New Clients:</h3>
+  <table id="clientsTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-  <div id="link"></div>
+  <!-- Section: Edit Forms -->
+  <h2>Edit Forms</h2>
+  <label>Search Client by Name:</label>
+  <input type="text" id="searchName" placeholder="Type a name...">
+
+  <table id="formsTable">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Informed Consent</th>
+        <th>Medical History</th>
+        <th>Privacy Practices Notices</th>
+        <th>E-sign Consent</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
 <script>
-let selectedClient = null;
+  
+const clientsTableBody = document.querySelector('#clientsTable tbody');
+const formsTableBody = document.querySelector('#formsTable tbody');
 
+// Load all clients initially
 function loadClients() {
   fetch('/clients')
     .then(res => res.json())
     .then(clients => {
-      const html = `<table>
-        <tr><th>Select</th><th>ID</th><th>Name</th><th>Email</th><th>Token</th></tr>
-        ${clients.map(c => `<tr>
-          <td><input type="radio" name="client" value="${c.id}" onclick="selectClient(${c.id}, '${c.token}')"></td>
+      clientsTableBody.innerHTML = '';
+      clients.forEach(c => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
           <td>${c.id}</td>
           <td>${c.first_name} ${c.last_name}</td>
           <td>${c.email}</td>
-          <td>${c.token}</td>
-        </tr>`).join('')}
-      </table>`;
-      document.getElementById('clients').innerHTML = html;
+          <td>${c.phone}</td>
+        `;
+        clientsTableBody.appendChild(tr);
+      });
     });
 }
 
-function selectClient(id, token) {
-  selectedClient = {id, token};
-}
-
-function addClient() {
-  const first_name = document.getElementById('first_name').value;
-  const last_name = document.getElementById('last_name').value;
-  const email = document.getElementById('email').value;
-  const phone = document.getElementById('phone').value;
+// Add client form submit
+document.getElementById('addClientForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = {
+    first_name: formData.get('first_name'),
+    last_name: formData.get('last_name'),
+    email: formData.get('email'),
+    phone: formData.get('phone')
+  };
 
   fetch('/clients', {
-    method:'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({first_name,last_name,email,phone})
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
   })
-  .then(res=>res.json())
-  .then(()=> loadClients());
-}
-
-function sendForms() {
-  if (!selectedClient) return alert("Select a client first!");
-  const names = document.getElementById('form_names').value.split(',').map(s=>s.trim());
-  if (names.length === 0) return alert("Enter form names");
-
-  fetch(`/forms/${selectedClient.id}`, {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({names})
-  })
-  .then(res=>res.json())
-  .then(() => {
-    document.getElementById('link').innerHTML =
-      `<p>Link to send to client: <a href="/client/${selectedClient.token}" target="_blank">
-      /client/${selectedClient.token}</a></p>`;
+  .then(res => res.json())
+  .then(client => {
+    alert(`Client added with token: ${client.token}`);
+    e.target.reset();
+    loadClients();
   });
-}
+});
 
-// Initial load
+// Search and load forms by client name
+document.getElementById('searchName').addEventListener('input', e => {
+  const search = e.target.value.toLowerCase();
+  fetch('/clients')
+    .then(res => res.json())
+    .then(clients => {
+      const filtered = clients.filter(c => 
+        `${c.first_name} ${c.last_name}`.toLowerCase().includes(search)
+      );
+
+      formsTableBody.innerHTML = '';
+      filtered.forEach(c => {
+        fetch(`/forms/${c.id}`)
+          .then(res => res.json())
+          .then(forms => {
+            // If client has no forms yet, create a default one with false booleans
+            if (forms.length === 0) {
+              fetch(`/forms/${c.id}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ names: ['default'] })
+              }).then(() => loadClients());
+              forms = [{ client_id: c.id, informed_consent: 0, medical_history: 0, privacy_practices_notices: 0, e_sign_consent: 0 }];
+            }
+
+            forms.forEach(f => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                <td>${c.first_name} ${c.last_name}</td>
+                <td>${c.token}</td>
+                <td><input type="checkbox" data-field="informed_consent" ${f.informed_consent ? 'checked' : ''}></td>
+                <td><input type="checkbox" data-field="medical_history" ${f.medical_history ? 'checked' : ''}></td>
+                <td><input type="checkbox" data-field="privacy_practices_notices" ${f.privacy_practices_notices ? 'checked' : ''}></td>
+                <td><input type="checkbox" data-field="e_sign_consent" ${f.e_sign_consent ? 'checked' : ''}></td>
+              `;
+              // Update checkbox
+              tr.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', () => {
+                  const field = cb.dataset.field;
+                  const value = cb.checked ? 1 : 0;
+                  fetch(`/forms/update/${f.token}`, {
+                    method: 'PATCH',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ field, value })
+                  });
+                });
+              });
+              formsTableBody.appendChild(tr);
+            });
+          });
+      });
+    });
+});
+
 loadClients();
+
+
 </script>
+<!-- Raw SQL Query Section -->
+<h2>Run Raw SQL Query</h2>
+<textarea id="sqlQuery" rows="5" style="width: 100%;" placeholder="Type your SQL query here..."></textarea>
+<br>
+<button id="executeQuery">Execute Query</button>
+
+<h3>Query Results:</h3>
+<table id="sqlResultsTable">
+  <thead></thead>
+  <tbody></tbody>
+</table>
+
+<script>
+// Execute raw SQL query
+document.getElementById('executeQuery').addEventListener('click', () => {
+  const query = document.getElementById('sqlQuery').value.trim();
+  if (!query) return alert('Please enter a SQL query');
+
+  fetch('/sql', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ query })
+  })
+  .then(res => res.json())
+  .then(result => {
+    const table = document.getElementById('sqlResultsTable');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+    thead.innerHTML = '';
+    tbody.innerHTML = '';
+
+    if (result.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="100%">No results</td></tr>';
+      return;
+    }
+
+    // Create table header
+    const headerRow = document.createElement('tr');
+    Object.keys(result[0]).forEach(col => {
+      const th = document.createElement('th');
+      th.textContent = col;
+      headerRow.appendChild(th);
+    });
+    thead.appendChild(headerRow);
+
+    // Create table rows
+    result.forEach(row => {
+      const tr = document.createElement('tr');
+      Object.values(row).forEach(val => {
+        const td = document.createElement('td');
+        td.textContent = val;
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+  })
+  .catch(err => alert('Error executing query: ' + err.message));
+});
+</script>
+
 </body>
 </html>
