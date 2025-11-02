@@ -80,3 +80,8 @@ The system is intended to fully integrate with existing scheduling, booking, and
 - Mobile app integration for staff on-the-go.  
 - Additional language support.  
 - Secure cloud hosting and backup strategies.  
+
+
+Todays plan:
+
+Admin send form page. List all 

@@ -54,6 +54,7 @@
     <thead>
       <tr>
         <th>Client</th>
+        <th>Token</th>
         <th>Informed Consent</th>
         <th>Medical History</th>
         <th>Privacy Practices Notices</th>
@@ -105,7 +106,6 @@ document.getElementById('addClientForm').addEventListener('submit', e => {
   })
   .then(res => res.json())
   .then(client => {
-    alert(`Client added with token: ${client.token}`);
     e.target.reset();
     loadClients();
   });
@@ -133,14 +133,14 @@ document.getElementById('searchName').addEventListener('input', e => {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ names: ['default'] })
               }).then(() => loadClients());
-              forms = [{ client_id: c.id, informed_consent: 0, medical_history: 0, privacy_practices_notices: 0, e_sign_consent: 0 }];
+              forms = [{client_id: c.id, informed_consent: 0, medical_history: 0, privacy_practices_notices: 0, e_sign_consent: 0 }];
             }
 
             forms.forEach(f => {
               const tr = document.createElement('tr');
               tr.innerHTML = `
                 <td>${c.first_name} ${c.last_name}</td>
-                <td>${c.token}</td>
+                <td>${f.token}</td>
                 <td><input type="checkbox" data-field="informed_consent" ${f.informed_consent ? 'checked' : ''}></td>
                 <td><input type="checkbox" data-field="medical_history" ${f.medical_history ? 'checked' : ''}></td>
                 <td><input type="checkbox" data-field="privacy_practices_notices" ${f.privacy_practices_notices ? 'checked' : ''}></td>
@@ -204,7 +204,7 @@ document.getElementById('executeQuery').addEventListener('click', () => {
       tbody.innerHTML = '<tr><td colspan="100%">No results</td></tr>';
       return;
     }
-
+    
     // Create table header
     const headerRow = document.createElement('tr');
     Object.keys(result[0]).forEach(col => {

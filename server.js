@@ -13,8 +13,8 @@ db.run('PRAGMA foreign_keys = ON');
 
 // Create tables
 db.serialize(() => {
-    db.run('DROP TABLE IF EXISTS forms'); // delete old table
-  db.run('DROP TABLE IF EXISTS clients'); // delete old table
+  //   db.run('DROP TABLE IF EXISTS forms'); // delete old table
+  // db.run('DROP TABLE IF EXISTS clients'); // delete old table
   db.run(`
     CREATE TABLE IF NOT EXISTS clients (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,6 +38,18 @@ db.serialize(() => {
     )
   `);
 });
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS form_submissions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    client_id INTEGER,
+    form_type TEXT,        -- e.g., 'medical_history'
+    data TEXT,             -- JSON string of form data
+    submitted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(client_id) REFERENCES clients(id)
+  )
+`);
+
 
 // Get all clients
 app.get('/clients', (req, res) => {
@@ -124,5 +136,62 @@ app.post('/sql', (req, res) => {
     res.json(rows);
   });
 });
+
+const path = require('path'); // <- ADD THIS
+
+app.get('/form-wizard/:token', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'form-wizard.html'));
+});
+
+app.post("/submit-form/:token", (req, res) => {
+  const { token } = req.params;
+  const { formType, data } = req.body;
+
+  // Get client_id from forms table
+  db.get("SELECT client_id FROM forms WHERE token = ?", [token], (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (!row) return res.status(404).json({ error: "Form not found" });
+
+    const clientId = row.client_id;
+
+    // Insert form submission
+    db.run(
+      `INSERT INTO form_submissions (client_id, form_type, data)
+       VALUES (?, ?, ?)`,
+      [clientId, formType, JSON.stringify(data)],
+      function(err2) {
+        if (err2) return res.status(500).json({ error: err2.message });
+        res.json({ success: true, submissionId: this.lastID });
+      }
+    );
+  });
+});
+
+
+
+// Get all clients
+app.get('/clients', async (req, res) => {
+  const clients = await db.all("SELECT id, first_name, last_name FROM clients");
+  res.json(clients);
+});
+
+// Get all forms for a client
+app.get('/client-forms/:clientId', (req, res) => {
+  const { clientId } = req.params;
+  console.log('clientId param:', clientId);
+
+  db.all(
+    "SELECT form_type, data, submitted_at FROM form_submissions WHERE client_id = ? ORDER BY submitted_at DESC",
+    [clientId],
+    (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json(rows); 
+    }
+  );
+});
+
+
+
+
 
 app.listen(3000, () => console.log('Server running on http://localhost:3000'));
