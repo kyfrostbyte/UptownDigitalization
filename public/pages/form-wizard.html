@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles/forms/form-wizard.css">
+  <title>Form Wizard</title>
+</head>
+<body>
+  <div class="layout-grid" id="layoutGrid">
+    <header class="header">
+      <button id="navToggle" class="nav-toggle-btn" aria-label="Toggle navigation">☰</button>
+      <h1 id="formTitle">Welcome to the Form Wizard</h1>
+    </header>
+
+    <nav class="side-nav" id="formNav" aria-label="Form navigation">
+      <!-- Nav links inserted dynamically -->
+    </nav>
+
+    <main class="main-content" id="formContainer">
+      <div id="landingPage">
+        <h2>Interactive Form Wizard</h2>
+        <p>Welcome! This wizard will guide you through completing the forms assigned to you. Click a form from the list below to begin.</p>
+        <div id="landingLinks"></div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="../scripts/forms/form-wizard.js"></script>
+  <script type="module" src="../scripts/forms/forms-common.js"></script>
+  <script type="module" src="../scripts/forms/medical-history.js"></script>
+</body>
+</html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #2c3e50;
+      --primary-light: #34495e;
+      --accent: #3498db;
+      --accent-hover: #2980b9;
+      --success: #27ae60;
+      --danger: #e74c3c;
+      --border: #ddd;
+      --bg-light: #f8f9fa;
+      --text: #333;
+      --text-muted: #6c757d;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--bg-light);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+    }
+
+    .section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--bg-light);
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="search"],
+    textarea {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    }
+
+    textarea {
+      resize: vertical;
+      font-family: 'Courier New', monospace;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--bg-light);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    .quick-queries {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: var(--bg-light);
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: var(--primary);
+      border-bottom: 2px solid var(--border);
+    }
+
+    td {
+      padding: 0.875rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr:hover {
+      background: var(--bg-light);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    td input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: var(--accent);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-muted);
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding-left: 2.5rem;
+    }
+
+    .search-box::before {
+      content: "🔍";
+      position: absolute;
+      left: 0.875rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .badge-success {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .badge-warning {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    code {
+      background: var(--bg-light);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .section {
+        padding: 1.5rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-queries {
+        flex-direction: column;
+      }
+
+      table {
+        font-size: 0.85rem;
+      }
+
+      th, td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🛠️ Admin Panel</h1>
+  </header>
+
+  <div class="container">
+    <!-- Add New Client Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>➕ Add New Client</h2>
+      </div>
+      
+      <form id="addClientForm">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first_name" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last_name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" name="phone" required>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Add Client</button>
+      </form>
+    </section>
+
+    <!-- Recent Clients Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>📋 Recent Clients</h2>
+        <button class="btn-secondary btn-sm" onclick="loadClients()">🔄 Refresh</button>
+      </div>
+      
+      <div class="table-wrapper">
+        <table id="clientsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="4" class="empty-state">Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Manage Forms Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>📝 Manage Client Forms</h2>
+      </div>
+      
+      <div class="search-box">
+        <input type="search" id="searchName" placeholder="Search by client name...">
+      </div>
+
+      <div class="table-wrapper">
+        <table id="formsTable">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Token</th>
+              <th>Informed Consent</th>
+              <th>Medical History</th>
+              <th>Privacy Practices</th>
+              <th>E-sign Consent</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="6" class="empty-state">Search for a client to manage their forms</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SQL Query Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2>💻 Database Query</h2>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <label style="margin-bottom: 1rem; display: block;">Quick Queries</label>
+        <div class="quick-queries">
+          <button class="btn-secondary btn-sm" onclick="runQuickQuery('SELECT * FROM clients ORDER BY id DESC LIMIT 20')">All Clients</button>
+          <button class="btn-secondary btn-sm" onclick="runQuickQuery('SELECT * FROM forms ORDER BY id DESC LIMIT 20')">All Forms</button>
+          <button class="btn-secondary btn-sm" onclick="runQuickQuery('SELECT c.first_name, c.last_name, c.email, f.token, f.informed_consent, f.medical_history FROM clients c JOIN forms f ON c.id = f.client_id')">Clients with Forms</button>
+          <button class="btn-secondary btn-sm" onclick="runQuickQuery('SELECT COUNT(*) as total_clients FROM clients')">Client Count</button>
+          <button class="btn-secondary btn-sm" onclick="runQuickQuery('SELECT COUNT(*) as total_forms FROM forms')">Form Count</button>
+          <button class="btn-secondary btn-sm" onclick="runQuickQuery('SELECT * FROM forms WHERE informed_consent = 1 AND medical_history = 1')">Completed Forms</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Custom SQL Query</label>
+        <textarea id="sqlQuery" rows="6" placeholder="Enter your SQL query here...&#10;Example: SELECT * FROM clients WHERE email LIKE '%@example.com'"></textarea>
+      </div>
+      
+      <button class="btn-primary" id="executeQuery">▶️ Execute Query</button>
+      <button class="btn-secondary" onclick="document.getElementById('sqlQuery').value = ''; document.getElementById('sqlResultsTable').querySelector('tbody').innerHTML = ''; document.getElementById('sqlResultsTable').querySelector('thead').innerHTML = '';">Clear</button>
+
+      <div style="margin-top: 2rem;">
+        <h3 style="margin-bottom: 1rem; color: var(--primary);">Query Results</h3>
+        <div class="table-wrapper">
+          <table id="sqlResultsTable">
+            <thead></thead>
+            <tbody>
+              <tr><td class="empty-state">No query executed yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const clientsTableBody = document.querySelector('#clientsTable tbody');
+    const formsTableBody = document.querySelector('#formsTable tbody');
+
+    // Load all clients
+    function loadClients() {
+      clientsTableBody.innerHTML = '<tr><td colspan="4" class="empty-state">Loading...</td></tr>';
+      
+      fetch('/clients')
+        .then(res => res.json())
+        .then(clients => {
+          if (clients.length === 0) {
+            clientsTableBody.innerHTML = '<tr><td colspan="4" class="empty-state">No clients found</td></tr>';
+            return;
+          }
+
+          clientsTableBody.innerHTML = '';
+          clients.forEach(c => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+              <td><code>${c.id}</code></td>
+              <td>${c.first_name} ${c.last_name}</td>
+              <td>${c.email}</td>
+              <td>${c.phone}</td>
+            `;
+            clientsTableBody.appendChild(tr);
+          });
+        })
+        .catch(err => {
+          clientsTableBody.innerHTML = '<tr><td colspan="4" class="empty-state" style="color: var(--danger);">Error loading clients</td></tr>';
+          console.error(err);
+        });
+    }
+
+    // Add client form submit
+    document.getElementById('addClientForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {
+        first_name: formData.get('first_name'),
+        last_name: formData.get('last_name'),
+        email: formData.get('email'),
+        phone: formData.get('phone')
+      };
+
+      fetch('/clients', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(client => {
+        e.target.reset();
+        loadClients();
+        alert('✓ Client added successfully!');
+      })
+      .catch(err => {
+        alert('✗ Error adding client');
+        console.error(err);
+      });
+    });
+
+    // Search and load forms by client name
+    let searchTimeout;
+    document.getElementById('searchName').addEventListener('input', e => {
+      clearTimeout(searchTimeout);
+      
+      const search = e.target.value.toLowerCase().trim();
+      
+      if (!search) {
+        formsTableBody.innerHTML = '<tr><td colspan="6" class="empty-state">Search for a client to manage their forms</td></tr>';
+        return;
+      }
+
+      searchTimeout = setTimeout(() => {
+        formsTableBody.innerHTML = '<tr><td colspan="6" class="empty-state">Searching...</td></tr>';
+        
+        fetch('/clients')
+          .then(res => res.json())
+          .then(clients => {
+            const filtered = clients.filter(c => 
+              `${c.first_name} ${c.last_name}`.toLowerCase().includes(search)
+            );
+
+            if (filtered.length === 0) {
+              formsTableBody.innerHTML = '<tr><td colspan="6" class="empty-state">No clients found matching your search</td></tr>';
+              return;
+            }
+
+            formsTableBody.innerHTML = '';
+            filtered.forEach(c => {
+              fetch(`/forms/${c.id}`)
+                .then(res => res.json())
+                .then(forms => {
+                  // If client has no forms yet, create a default one
+                  if (forms.length === 0) {
+                    fetch(`/forms/${c.id}`, {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/json'},
+                      body: JSON.stringify({ names: ['default'] })
+                    }).then(() => loadClients());
+                    forms = [{
+                      client_id: c.id, 
+                      token: 'pending',
+                      informed_consent: 0, 
+                      medical_history: 0, 
+                      privacy_practices_notices: 0, 
+                      e_sign_consent: 0 
+                    }];
+                  }
+
+                  forms.forEach(f => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                      <td>${c.first_name} ${c.last_name}</td>
+                      <td><code>${f.token}</code></td>
+                      <td style="text-align: center;">
+                        <input type="checkbox" data-field="informed_consent" ${f.informed_consent ? 'checked' : ''}>
+                      </td>
+                      <td style="text-align: center;">
+                        <input type="checkbox" data-field="medical_history" ${f.medical_history ? 'checked' : ''}>
+                      </td>
+                      <td style="text-align: center;">
+                        <input type="checkbox" data-field="privacy_practices_notices" ${f.privacy_practices_notices ? 'checked' : ''}>
+                      </td>
+                      <td style="text-align: center;">
+                        <input type="checkbox" data-field="e_sign_consent" ${f.e_sign_consent ? 'checked' : ''}>
+                      </td>
+                    `;
+                    
+                    // Update checkbox handlers
+                    tr.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                      cb.addEventListener('change', () => {
+                        const field = cb.dataset.field;
+                        const value = cb.checked ? 1 : 0;
+                        fetch(`/forms/update/${f.token}`, {
+                          method: 'PATCH',
+                          headers: {'Content-Type': 'application/json'},
+                          body: JSON.stringify({ field, value })
+                        })
+                        .then(() => {
+                          // Visual feedback
+                          cb.parentElement.style.background = '#d4edda';
+                          setTimeout(() => {
+                            cb.parentElement.style.background = '';
+                          }, 500);
+                        })
+                        .catch(err => {
+                          console.error(err);
+                          alert('Error updating form');
+                          cb.checked = !cb.checked;
+                        });
+                      });
+                    });
+                    
+                    formsTableBody.appendChild(tr);
+                  });
+                });
+            });
+          })
+          .catch(err => {
+            formsTableBody.innerHTML = '<tr><td colspan="6" class="empty-state" style="color: var(--danger);">Error loading forms</td></tr>';
+            console.error(err);
+          });
+      }, 300);
+    });
+
+    // Quick query function
+    function runQuickQuery(query) {
+      document.getElementById('sqlQuery').value = query;
+      document.getElementById('executeQuery').click();
+    }
+
+    // Execute raw SQL query
+    document.getElementById('executeQuery').addEventListener('click', () => {
+      const query = document.getElementById('sqlQuery').value.trim();
+      if (!query) {
+        alert('Please enter a SQL query');
+        return;
+      }
+
+      const table = document.getElementById('sqlResultsTable');
+      const thead = table.querySelector('thead');
+      const tbody = table.querySelector('tbody');
+      
+      tbody.innerHTML = '<tr><td class="empty-state">Executing query...</td></tr>';
+      thead.innerHTML = '';
+
+      fetch('/sql', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ query })
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (result.length === 0) {
+          tbody.innerHTML = '<tr><td class="empty-state">Query executed successfully - No results returned</td></tr>';
+          return;
+        }
+        
+        // Create table header
+        const headerRow = document.createElement('tr');
+        Object.keys(result[0]).forEach(col => {
+          const th = document.createElement('th');
+          th.textContent = col;
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Create table rows
+        tbody.innerHTML = '';
+        result.forEach(row => {
+          const tr = document.createElement('tr');
+          Object.values(row).forEach(val => {
+            const td = document.createElement('td');
+            td.textContent = val !== null ? val : '';
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(err => {
+        tbody.innerHTML = `<tr><td class="empty-state" style="color: var(--danger);">Error: ${err.message}</td></tr>`;
+        console.error('Error executing query:', err);
+      });
+    });
+
+    // Load clients on page load
+    loadClients();
+  </script>
+</body>
+</html>

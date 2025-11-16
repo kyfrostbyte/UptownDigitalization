@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Management</title>
+  <link rel="stylesheet" href="../../styles/staff/profile.css">
+  <script type="module" src="../../scripts/staff/profile.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Client Management</h1>
+    </header>
+
+    <main>
+      <table id="clientsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="formsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Manage Client Forms</h2>
+        <button class="close" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="client-info">Select forms to assign to <strong id="clientName"></strong>:</p>
+        
+        <form id="formsCheckboxForm">
+          <ul id="formsList" class="forms-list"></ul>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="saveFormsBtn">Save & Generate Link</button>
+          </div>
+        </form>
+
+        <div id="sentUrlContainer" class="url-container" style="display: none;">
+          <label for="sentUrl">Client Form URL:</label>
+          <div class="url-input-group">
+            <input type="text" id="sentUrl" readonly />
+            <button type="button" class="btn btn-copy" id="copyUrlBtn">Copy</button>
+          </div>
+          <p class="url-help-text">Share this link with the client to complete their forms.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
