@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Practices Acknowledgement</title>
+    <link rel="stylesheet" href="../styles/forms/privacy-practices.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="form-header">
+        <h1>Acknowledgement of Receipt</h1>
+        <p>of Notice of Privacy Practices</p>
+      </div>
+
+      <form id="privacyPracticesForm">
+        <!-- Main Acknowledgement -->
+        <section class="form-section">
+          <div class="notice-box">
+            <p class="notice-text">
+              I have received a copy of this office's Notice of Privacy Practices.
+            </p>
+          </div>
+
+          <div class="signature-group">
+            <label>Full Name</label>
+            <input type="text" name="namePrinted" class="text-input" placeholder="Jane Doe" required />
+          </div>
+
+          <div class="signature-group">
+            <label>Date:</label>
+            <input type="date" name="signatureDate" class="date-input" required />
+          </div>
+        </section>
+
+        <div class="form-actions">
+          <button type="button" id="resetBtn" class="btn-secondary">Reset Form</button>
+          <button type="submit" class="btn-primary">Submit Acknowledgement</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../scripts/forms/privacy-practices.js"></script>
+  </body>
+</html>

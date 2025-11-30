@@ -2,7 +2,7 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const { nanoid } = require('nanoid');
 const path = require('path');
-
+require('dotenv').config();
 const app = express();
 
 app.use(express.json());
@@ -62,7 +62,9 @@ async function initializeTables() {
         purchase_agreement BOOLEAN DEFAULT 0,
         medical_history BOOLEAN DEFAULT 0,
         informed_consent BOOLEAN DEFAULT 0,
-        e_sign_consent BOOLEAN DEFAULT 0,
+        privacy_practices BOOLEAN DEFAULT 0,
+        skin_type_assessment BOOLEAN DEFAULT 0,
+        media_release BOOLEAN DEFAULT 0,
         sent BOOLEAN DEFAULT 0,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -111,39 +113,13 @@ async function seedDatabase() {
       const clientId = result.lastID;
       const token = nanoid(8);
 
-      // Create forms_status with some variety
-      const randomForms = {
-        purchase_agreement: Math.random() > 0.5 ? 1 : 0,
-        medical_history: Math.random() > 0.5 ? 1 : 0,
-        informed_consent: Math.random() > 0.3 ? 1 : 0,
-        e_sign_consent: Math.random() > 0.5 ? 1 : 0
-      };
-
       await dbRun(
-        `INSERT INTO forms_status (token, client_id, purchase_agreement, medical_history, informed_consent, e_sign_consent, sent)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
-        [token, clientId, randomForms.purchase_agreement, randomForms.medical_history, 
-         randomForms.informed_consent, randomForms.e_sign_consent, 0]
+        `INSERT INTO forms_status (token, client_id, purchase_agreement, medical_history, informed_consent, media_release, privacy_practices, skin_type_assessment, sent)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [token, clientId, 0, 0, 0, 0, 0, 0, 0]
       );
 
       console.log(`  ✓ Created client: ${client.first_name} ${client.last_name} (token: ${token})`);
-
-      // Add some sample submissions for clients who have completed forms
-      if (Math.random() > 0.6) {
-        const sampleSubmission = {
-          form_type: 'medical_history',
-          data: JSON.stringify({
-            allergies: 'None',
-            medications: 'Aspirin',
-            conditions: 'Healthy'
-          })
-        };
-
-        await dbRun(
-          `INSERT INTO form_submissions (client_id, form_type, data) VALUES (?, ?, ?)`,
-          [clientId, sampleSubmission.form_type, sampleSubmission.data]
-        );
-      }
     }
 
     console.log('✓ Database seeded successfully');
@@ -245,8 +221,8 @@ app.post('/clients', async (req, res) => {
     const token = nanoid(8);
 
     await dbRun(
-      `INSERT INTO forms_status (token, client_id, purchase_agreement, medical_history, informed_consent, e_sign_consent)
-       VALUES (?, ?, 0, 0, 0, 0)`,
+      `INSERT INTO forms_status (token, client_id, purchase_agreement, medical_history, informed_consent, privacy_practices, skin_type_assessment, media_release)
+       VALUES (?, ?, 0, 0, 0, 0, 0, 0)`,
       [token, clientId]
     );
 
@@ -318,7 +294,7 @@ app.get('/forms/:client_id', async (req, res) => {
 app.patch('/forms/update/:token', async (req, res) => {
   const { token } = req.params;
   const { field, value } = req.body;
-  const validFields = ['purchase_agreement', 'medical_history', 'informed_consent', 'e_sign_consent', 'sent'];
+  const validFields = ['purchase_agreement', 'medical_history', 'informed_consent', 'privacy_practices', 'skin_type_assessment', 'media_release', 'sent'];
 
   if (!validFields.includes(field)) {
     return res.status(400).json({ error: 'Invalid field name' });
@@ -469,6 +445,83 @@ app.get('/api/forms', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// FORM MANAGEMENT ENDPOINTS
+app.get('/api/all-submissions', async (req, res) => {
+  try {
+    const submissions = await dbAll(`
+      SELECT 
+        s.*,
+        c.first_name,
+        c.last_name,
+        c.email,
+        c.phone
+      FROM form_submissions s
+      JOIN clients c ON c.id = s.client_id
+      ORDER BY s.submitted_at DESC
+    `);
+
+    const parsed = submissions.map(sub => ({
+      ...sub,
+      data: JSON.parse(sub.data)
+    }));
+
+    res.json(parsed);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update a form submission
+app.patch('/submissions/:id', async (req, res) => {
+  const { id } = req.params;
+  const { data } = req.body;
+
+  if (!data) {
+    return res.status(400).json({ error: 'No data provided' });
+  }
+
+  try {
+    const result = await dbRun(
+      `UPDATE form_submissions SET data = ?, submitted_at = CURRENT_TIMESTAMP WHERE id = ?`,
+      [JSON.stringify(data), id]
+    );
+
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'Submission not found' });
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get clients with forms status (optimized for form management page)
+app.get('/api/clients-with-forms', async (req, res) => {
+  try {
+    const clients = await dbAll(`
+      SELECT 
+        c.*,
+        fs.purchase_agreement,
+        fs.medical_history,
+        fs.skin_type_assessment,
+        fs.informed_consent,
+        fs.privacy_practices,
+        fs.media_release,
+        fs.sent,
+        fs.token
+      FROM clients c
+      LEFT JOIN forms_status fs ON fs.client_id = c.id
+      ORDER BY c.last_name, c.first_name
+    `);
+
+    res.json(clients);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 // Health check endpoint
 app.get('/health', (req, res) => {

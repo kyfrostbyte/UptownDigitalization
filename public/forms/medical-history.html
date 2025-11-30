@@ -4,1527 +4,540 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medical History Form</title>
-    <link rel="stylesheet" href="../styles/forms/medical_history.css" />
+    <link rel="stylesheet" href="../styles/forms/medical-history.css" />
   </head>
   <body>
     <div class="form-container">
       <div class="form-header">
-        <h1>Skin/Laser Care Consultation</h1>
-        <p>Medical History & Treatment Form</p>
+        <h1>Medical History</h1>
+        <p>Treatment Preparation Form</p>
       </div>
 
       <form id="medicalHistoryForm">
         <!-- Personal Information -->
-        <div class="section">
-          <h2 class="section-title">Personal Information</h2>
+        <section class="form-section">
+          <h2>Personal Information</h2>
           <div class="form-grid">
             <div class="form-group">
-              <label for="firstName" class="required">First Name</label>
-              <input type="text" id="firstName" name="firstName" required />
+              <label class="required">First Name</label>
+              <input type="text" name="firstName" required />
             </div>
             <div class="form-group">
-              <label for="middleInitial">Middle Initial</label>
-              <input
-                type="text"
-                id="middleInitial"
-                name="middleInitial"
-                maxlength="1"
-              />
+              <label>Middle Initial</label>
+              <input type="text" name="middleInitial" maxlength="1" />
             </div>
             <div class="form-group">
-              <label for="lastName" class="required">Last Name</label>
-              <input type="text" id="lastName" name="lastName" required />
+              <label class="required">Last Name</label>
+              <input type="text" name="lastName" required />
             </div>
             <div class="form-group">
-              <label for="preferredName">Preferred Name</label>
-              <input type="text" id="preferredName" name="preferredName" />
+              <label>Preferred Name</label>
+              <input type="text" name="preferredName" />
             </div>
             <div class="form-group">
-              <label for="birthdate" class="required">Birthdate</label>
-              <input type="date" id="birthdate" name="birthdate" required />
+              <label class="required">Birthdate</label>
+              <input type="date" name="birthdate" required />
             </div>
             <div class="form-group">
-              <label for="cellPhone" class="required">Cell Phone</label>
-              <input
-                type="tel"
-                id="cellPhone"
-                name="cellPhone"
-                pattern="[0-9]{3}-?[0-9]{3}-?[0-9]{4}"
-                placeholder="555-123-4567"
-                required
-              />
-              <span class="error-message"
-                >Please enter a valid phone number</span
-              >
+              <label class="required">Cell Phone</label>
+              <input type="tel" name="cellPhone" placeholder="555-123-4567" required />
             </div>
             <div class="form-group full-width">
-              <label for="email" class="required">Email</label>
-              <input type="email" id="email" name="email" required />
+              <label class="required">Email</label>
+              <input type="email" name="email" required />
             </div>
             <div class="form-group">
-              <label for="address" class="required">Home Address</label>
-              <input type="text" id="address" name="address" required />
+              <label class="required">Home Address</label>
+              <input type="text" name="address" required />
             </div>
             <div class="form-group">
-              <label for="city" class="required">City</label>
-              <input type="text" id="city" name="city" required />
+              <label class="required">City</label>
+              <input type="text" name="city" required />
             </div>
             <div class="form-group">
-              <label for="state" class="required">State</label>
-              <input
-                type="text"
-                id="state"
-                name="state"
-                maxlength="2"
-                placeholder="KY"
-                required
-              />
+              <label class="required">State</label>
+              <input type="text" name="state" maxlength="2" placeholder="KY" required />
             </div>
             <div class="form-group">
-              <label for="zip" class="required">Zip Code</label>
-              <input
-                type="text"
-                id="zip"
-                name="zip"
-                pattern="[0-9]{5}"
-                placeholder="12345"
-                required
-              />
+              <label class="required">Zip Code</label>
+              <input type="text" name="zip" pattern="[0-9]{5}" placeholder="12345" required />
             </div>
             <div class="form-group">
-              <label for="occupation">Occupation</label>
-              <input type="text" id="occupation" name="occupation" />
+              <label>Occupation</label>
+              <input type="text" name="occupation" />
             </div>
             <div class="form-group">
-              <label for="businessPhone">Business Phone</label>
-              <input
-                type="tel"
-                id="businessPhone"
-                name="businessPhone"
-                pattern="[0-9]{3}-?[0-9]{3}-?[0-9]{4}"
-                placeholder="555-123-4567"
-              />
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 1rem">
-            <label>I identify my gender as:</label>
-            <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="genderMale"
-                  name="gender"
-                  value="male"
-                />
-                <label for="genderMale">Male</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="genderFemale"
-                  name="gender"
-                  value="female"
-                />
-                <label for="genderFemale">Female</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="genderOther"
-                  name="gender"
-                  value="other"
-                />
-                <label for="genderOther">Other</label>
-              </div>
+              <label>Business Phone</label>
+              <input type="tel" name="businessPhone" placeholder="555-123-4567" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="pronouns">Preferred Pronouns</label>
-            <input
-              type="text"
-              id="pronouns"
-              name="pronouns"
-              placeholder="e.g., he/him, she/her, they/them"
-            />
+            <label>I identify my gender as:</label>
+            <div class="radio-group">
+              <label><input type="radio" name="gender" value="male" /> Male</label>
+              <label><input type="radio" name="gender" value="female" /> Female</label>
+              <label><input type="radio" name="gender" value="other" /> Other</label>
+            </div>
           </div>
-        </div>
+
+          <div class="form-group">
+            <label>Preferred Pronouns</label>
+            <input type="text" name="pronouns" placeholder="e.g., he/him, she/her, they/them" />
+          </div>
+        </section>
 
         <!-- Emergency Contact -->
-        <div class="section">
-          <h2 class="section-title">Emergency Contact</h2>
+        <section class="form-section">
+          <h2>Emergency Contact</h2>
           <div class="form-grid">
             <div class="form-group">
-              <label for="emergencyName" class="required">Contact Name</label>
-              <input
-                type="text"
-                id="emergencyName"
-                name="emergencyName"
-                required
-              />
+              <label class="required">Contact Name</label>
+              <input type="text" name="emergencyName" required />
             </div>
             <div class="form-group">
-              <label for="emergencyPhone" class="required">Phone Number</label>
-              <input
-                type="tel"
-                id="emergencyPhone"
-                name="emergencyPhone"
-                pattern="[0-9]{3}-?[0-9]{3}-?[0-9]{4}"
-                required
-              />
+              <label class="required">Phone Number</label>
+              <input type="tel" name="emergencyPhone" required />
             </div>
             <div class="form-group">
-              <label for="emergencyRelationship" class="required"
-                >Relationship</label
-              >
-              <input
-                type="text"
-                id="emergencyRelationship"
-                name="emergencyRelationship"
-                required
-              />
+              <label class="required">Relationship</label>
+              <input type="text" name="emergencyRelationship" required />
             </div>
             <div class="form-group">
               <label>Share medical info with this person?</label>
               <div class="radio-group">
-                <div class="radio-item">
-                  <input
-                    type="radio"
-                    id="shareMedicalYes"
-                    name="shareMedical"
-                    value="yes"
-                  />
-                  <label for="shareMedicalYes">Yes</label>
-                </div>
-                <div class="radio-item">
-                  <input
-                    type="radio"
-                    id="shareMedicalNo"
-                    name="shareMedical"
-                    value="no"
-                  />
-                  <label for="shareMedicalNo">No</label>
-                </div>
+                <label><input type="radio" name="shareMedical" value="yes" /> Yes</label>
+                <label><input type="radio" name="shareMedical" value="no" /> No</label>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- How Did You Hear About Us -->
-        <div class="section">
-          <h2 class="section-title">How Did You Hear About Us?</h2>
-          <div class="checkbox-group">
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="hearGoogle"
-                name="hearAbout"
-                value="google"
-              />
-              <label for="hearGoogle">Google</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="hearFacebook"
-                name="hearAbout"
-                value="facebook"
-              />
-              <label for="hearFacebook">Facebook</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="hearInstagram"
-                name="hearAbout"
-                value="instagram"
-              />
-              <label for="hearInstagram">Instagram</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="hearYouTube"
-                name="hearAbout"
-                value="youtube"
-              />
-              <label for="hearYouTube">YouTube</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="hearRadio"
-                name="hearAbout"
-                value="radio"
-              />
-              <label for="hearRadio">Radio</label>
-            </div>
-            <div class="checkbox-item">
-              <input type="checkbox" id="hearTV" name="hearAbout" value="tv" />
-              <label for="hearTV">TV</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="hearFriend"
-                name="hearAbout"
-                value="friend"
-              />
-              <label for="hearFriend">Friend/Family</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="hearPhysician"
-                name="hearAbout"
-                value="physician"
-              />
-              <label for="hearPhysician">Physician Referral</label>
-            </div>
+        <section class="form-section">
+          <h2>How Did You Hear About Us?</h2>
+          <div class="checkbox-grid">
+            <label><input type="checkbox" name="hearAbout" value="google" /> Google</label>
+            <label><input type="checkbox" name="hearAbout" value="facebook" /> Facebook</label>
+            <label><input type="checkbox" name="hearAbout" value="instagram" /> Instagram</label>
+            <label><input type="checkbox" name="hearAbout" value="youtube" /> YouTube</label>
+            <label><input type="checkbox" name="hearAbout" value="radio" /> Radio</label>
+            <label><input type="checkbox" name="hearAbout" value="tv" /> TV</label>
+            <label><input type="checkbox" name="hearAbout" value="friend" /> Friend/Family</label>
+            <label><input type="checkbox" name="hearAbout" value="physician" /> Physician Referral</label>
           </div>
 
-          <div class="conditional-field" id="friendNameField">
-            <label for="friendName">Friend/Family Member Name</label>
-            <input type="text" id="friendName" name="friendName" />
+          <div class="conditional-field" data-trigger="friend">
+            <label>Friend/Family Member Name</label>
+            <input type="text" name="friendName" />
           </div>
 
-          <div class="conditional-field" id="physicianNameField">
-            <label for="physicianName">Physician Name</label>
-            <input type="text" id="physicianName" name="physicianName" />
+          <div class="conditional-field" data-trigger="physician">
+            <label>Physician Name</label>
+            <input type="text" name="physicianName" />
           </div>
 
-          <div class="form-group" style="margin-top: 1.5rem">
+          <div class="form-group">
             <label>How do you prefer to be contacted?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="contactPhone"
-                  name="contactPreference"
-                  value="phone"
-                />
-                <label for="contactPhone">Phone</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="contactEmail"
-                  name="contactPreference"
-                  value="email"
-                />
-                <label for="contactEmail">Email</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="contactText"
-                  name="contactPreference"
-                  value="text"
-                />
-                <label for="contactText">Text</label>
-              </div>
+              <label><input type="radio" name="contactPreference" value="phone" /> Phone</label>
+              <label><input type="radio" name="contactPreference" value="email" /> Email</label>
+              <label><input type="radio" name="contactPreference" value="text" /> Text</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label
-              >Would you like to receive special offers and promotions via
-              email?</label
-            >
+            <label>Would you like to receive special offers and promotions via email?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="promotionsYes"
-                  name="receivePromotions"
-                  value="yes"
-                />
-                <label for="promotionsYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="promotionsNo"
-                  name="receivePromotions"
-                  value="no"
-                />
-                <label for="promotionsNo">No</label>
-              </div>
+              <label><input type="radio" name="receivePromotions" value="yes" /> Yes</label>
+              <label><input type="radio" name="receivePromotions" value="no" /> No</label>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- Previous Treatments -->
-        <div class="section">
-          <h2 class="section-title">Previous Treatments</h2>
+        <section class="form-section">
+          <h2>Previous Treatments</h2>
           <div class="form-group">
-            <label
-              >Have you ever had laser treatments or cosmetic procedures?</label
-            >
+            <label>Have you ever had laser treatments or cosmetic procedures?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="previousTreatmentsYes"
-                  name="previousTreatments"
-                  value="yes"
-                />
-                <label for="previousTreatmentsYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="previousTreatmentsNo"
-                  name="previousTreatments"
-                  value="no"
-                />
-                <label for="previousTreatmentsNo">No</label>
-              </div>
+              <label><input type="radio" name="previousTreatments" value="yes" /> Yes</label>
+              <label><input type="radio" name="previousTreatments" value="no" /> No</label>
             </div>
           </div>
 
-          <div class="conditional-field" id="previousTreatmentsDetails">
+          <div class="conditional-field" data-trigger="previousTreatments">
             <div class="form-group">
-              <label for="proceduresList">List procedures/areas treated</label>
-              <textarea
-                id="proceduresList"
-                name="proceduresList"
-                rows="3"
-              ></textarea>
+              <label>List procedures/areas treated</label>
+              <textarea name="proceduresList" rows="3"></textarea>
             </div>
             <div class="form-group">
-              <label for="complications">List any complications</label>
-              <textarea
-                id="complications"
-                name="complications"
-                rows="2"
-              ></textarea>
+              <label>List any complications</label>
+              <textarea name="complications" rows="2"></textarea>
             </div>
           </div>
 
-          <div class="form-grid" style="margin-top: 1.5rem">
+          <div class="form-grid">
             <div class="form-group full-width">
-              <label for="pharmacyLocation">Preferred Pharmacy Location</label>
-              <input
-                type="text"
-                id="pharmacyLocation"
-                name="pharmacyLocation"
-              />
+              <label>Preferred Pharmacy Location</label>
+              <input type="text" name="pharmacyLocation" />
             </div>
             <div class="form-group">
-              <label for="pharmacyPhone">Pharmacy Phone Number</label>
-              <input
-                type="tel"
-                id="pharmacyPhone"
-                name="pharmacyPhone"
-                pattern="[0-9]{3}-?[0-9]{3}-?[0-9]{4}"
-              />
+              <label>Pharmacy Phone Number</label>
+              <input type="tel" name="pharmacyPhone" />
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- Women Only Section -->
-        <div class="section" id="womenOnlySection" style="display: none">
-          <h2 class="section-title">Women Only</h2>
+        <section class="form-section" data-gender="female">
+          <h2>Women Only</h2>
           <div class="form-group">
-            <label
-              >Are you trying to become pregnant, are pregnant, or
-              lactating?</label
-            >
+            <label>Are you trying to become pregnant, are pregnant, or lactating?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="pregnantYes"
-                  name="pregnantStatus"
-                  value="yes"
-                />
-                <label for="pregnantYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="pregnantNo"
-                  name="pregnantStatus"
-                  value="no"
-                />
-                <label for="pregnantNo">No</label>
-              </div>
+              <label><input type="radio" name="pregnantStatus" value="yes" /> Yes</label>
+              <label><input type="radio" name="pregnantStatus" value="no" /> No</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label
-              >During pregnancy did you ever experience facial hyperpigmentation
-              or "pregnancy mask"?</label
-            >
+            <label>During pregnancy did you ever experience facial hyperpigmentation or "pregnancy mask"?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="hyperpigmentationYes"
-                  name="hyperpigmentation"
-                  value="yes"
-                />
-                <label for="hyperpigmentationYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="hyperpigmentationNo"
-                  name="hyperpigmentation"
-                  value="no"
-                />
-                <label for="hyperpigmentationNo">No</label>
-              </div>
+              <label><input type="radio" name="hyperpigmentation" value="yes" /> Yes</label>
+              <label><input type="radio" name="hyperpigmentation" value="no" /> No</label>
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- Skin Care -->
-        <div class="section">
-          <h2 class="section-title">About Your Skin</h2>
+        <!-- About Your Skin -->
+        <section class="form-section">
+          <h2>About Your Skin</h2>
           <div class="form-group">
-            <label
-              >Do you currently use skincare products as a daily regimen?</label
-            >
+            <label>Do you currently use skincare products as a daily regimen?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="skincareYes"
-                  name="useSkincare"
-                  value="yes"
-                />
-                <label for="skincareYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="skincareNo"
-                  name="useSkincare"
-                  value="no"
-                />
-                <label for="skincareNo">No</label>
-              </div>
+              <label><input type="radio" name="useSkincare" value="yes" /> Yes</label>
+              <label><input type="radio" name="useSkincare" value="no" /> No</label>
             </div>
           </div>
 
-          <div class="conditional-field" id="skincareProductsField">
-            <label for="skincareProducts">List products you use</label>
-            <textarea
-              id="skincareProducts"
-              name="skincareProducts"
-              rows="3"
-            ></textarea>
+          <div class="conditional-field" data-trigger="useSkincare">
+            <label>List products you use</label>
+            <textarea name="skincareProducts" rows="3"></textarea>
           </div>
 
-          <div class="form-group" style="margin-top: 1rem">
-            <label
-              >Are you currently under any other physician's care for your
-              skin?</label
-            >
+          <div class="form-group">
+            <label>Are you currently under any other physician's care for your skin?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="physicianCareYes"
-                  name="physicianCare"
-                  value="yes"
-                />
-                <label for="physicianCareYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="physicianCareNo"
-                  name="physicianCare"
-                  value="no"
-                />
-                <label for="physicianCareNo">No</label>
-              </div>
+              <label><input type="radio" name="physicianCare" value="yes" /> Yes</label>
+              <label><input type="radio" name="physicianCare" value="no" /> No</label>
             </div>
           </div>
 
-          <div class="conditional-field" id="physicianCareDetails">
-            <label for="physicianCareExplain">Please explain</label>
-            <textarea
-              id="physicianCareExplain"
-              name="physicianCareExplain"
-              rows="2"
-            ></textarea>
+          <div class="conditional-field" data-trigger="physicianCare">
+            <label>Please explain</label>
+            <textarea name="physicianCareExplain" rows="2"></textarea>
           </div>
 
-          <div class="form-group" style="margin-top: 1rem">
+          <div class="form-group">
             <label>Have you ever used any of the following products?</label>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="productRetinA"
-                  name="skinProducts"
-                  value="retin-a"
-                />
-                <label for="productRetinA">Retin-A</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="productAHA"
-                  name="skinProducts"
-                  value="aha"
-                />
-                <label for="productAHA">AHA</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="productHydroquinone"
-                  name="skinProducts"
-                  value="hydroquinone"
-                />
-                <label for="productHydroquinone">Hydroquinone</label>
-              </div>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="skinProducts" value="retin-a" /> Retin-A</label>
+              <label><input type="checkbox" name="skinProducts" value="aha" /> AHA</label>
+              <label><input type="checkbox" name="skinProducts" value="hydroquinone" /> Hydroquinone</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Have you ever had any of the following treatments?</label>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="treatmentChemicalPeel"
-                  name="skinTreatments"
-                  value="chemical-peel"
-                />
-                <label for="treatmentChemicalPeel">Chemical Peel</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="treatmentLaserPeel"
-                  name="skinTreatments"
-                  value="laser-peel"
-                />
-                <label for="treatmentLaserPeel">Laser Peel</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="treatmentGlycolicPeel"
-                  name="skinTreatments"
-                  value="glycolic-peel"
-                />
-                <label for="treatmentGlycolicPeel">Glycolic Peel</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="treatmentMicrodermabrasion"
-                  name="skinTreatments"
-                  value="microdermabrasion"
-                />
-                <label for="treatmentMicrodermabrasion"
-                  >Microdermabrasion</label
-                >
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="treatmentCosmeticSurgery"
-                  name="skinTreatments"
-                  value="cosmetic-surgery"
-                />
-                <label for="treatmentCosmeticSurgery">Cosmetic Surgery</label>
-              </div>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="skinTreatments" value="chemical-peel" /> Chemical Peel</label>
+              <label><input type="checkbox" name="skinTreatments" value="laser-peel" /> Laser Peel</label>
+              <label><input type="checkbox" name="skinTreatments" value="glycolic-peel" /> Glycolic Peel</label>
+              <label><input type="checkbox" name="skinTreatments" value="microdermabrasion" /> Microdermabrasion</label>
+              <label><input type="checkbox" name="skinTreatments" value="cosmetic-surgery" /> Cosmetic Surgery</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="lastTreatmentDate">Date of last treatment</label>
-            <input
-              type="date"
-              id="lastTreatmentDate"
-              name="lastTreatmentDate"
-            />
+            <label>Date of last treatment</label>
+            <input type="date" name="lastTreatmentDate" />
           </div>
 
           <div class="form-group">
             <label>Injectables: Have you been treated with:</label>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="injectableBotox"
-                  name="injectables"
-                  value="botox"
-                />
-                <label for="injectableBotox">Botox</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="injectableFillers"
-                  name="injectables"
-                  value="fillers"
-                />
-                <label for="injectableFillers">Fillers</label>
-              </div>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="injectables" value="botox" /> Botox</label>
+              <label><input type="checkbox" name="injectables" value="fillers" /> Fillers</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="lastInjectableDate"
-              >Date of last injectable treatment</label
-            >
-            <input
-              type="date"
-              id="lastInjectableDate"
-              name="lastInjectableDate"
-            />
+            <label>Date of last injectable treatment</label>
+            <input type="date" name="lastInjectableDate" />
           </div>
 
           <div class="form-group">
-            <label
-              >Do you ever use hair removal creams or waxes on your face?</label
-            >
+            <label>Do you ever use hair removal creams or waxes on your face?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="hairRemovalYes"
-                  name="hairRemoval"
-                  value="yes"
-                />
-                <label for="hairRemovalYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="hairRemovalNo"
-                  name="hairRemoval"
-                  value="no"
-                />
-                <label for="hairRemovalNo">No</label>
-              </div>
+              <label><input type="radio" name="hairRemoval" value="yes" /> Yes</label>
+              <label><input type="radio" name="hairRemoval" value="no" /> No</label>
             </div>
           </div>
 
-          <div class="conditional-field" id="hairRemovalDateField">
-            <label for="lastHairRemovalDate">Date of last use</label>
-            <input
-              type="date"
-              id="lastHairRemovalDate"
-              name="lastHairRemovalDate"
-            />
+          <div class="conditional-field" data-trigger="hairRemoval">
+            <label>Date of last use</label>
+            <input type="date" name="lastHairRemovalDate" />
           </div>
 
           <div class="form-group">
-            <label
-              >Are you willing to wear sun protection products all day, every
-              day?</label
-            >
+            <label>Are you willing to wear sun protection products all day, every day?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="sunProtectionYes"
-                  name="sunProtection"
-                  value="yes"
-                />
-                <label for="sunProtectionYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="sunProtectionNo"
-                  name="sunProtection"
-                  value="no"
-                />
-                <label for="sunProtectionNo">No</label>
-              </div>
+              <label><input type="radio" name="sunProtection" value="yes" /> Yes</label>
+              <label><input type="radio" name="sunProtection" value="no" /> No</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label
-              >Do you consume more than 2 alcoholic beverages per day?</label
-            >
+            <label>Do you consume more than 2 alcoholic beverages per day?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="alcoholYes"
-                  name="alcohol"
-                  value="yes"
-                />
-                <label for="alcoholYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input type="radio" id="alcoholNo" name="alcohol" value="no" />
-                <label for="alcoholNo">No</label>
-              </div>
+              <label><input type="radio" name="alcohol" value="yes" /> Yes</label>
+              <label><input type="radio" name="alcohol" value="no" /> No</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label for="supplements"
-              >Herbal, vitamin supplements, or fish oil you take</label
-            >
-            <textarea id="supplements" name="supplements" rows="2"></textarea>
+            <label>Herbal, vitamin supplements, or fish oil you take</label>
+            <textarea name="supplements" rows="2"></textarea>
           </div>
-        </div>
+        </section>
 
         <!-- Medical History -->
-        <div class="section">
-          <h2 class="section-title">Medical History</h2>
+        <section class="form-section">
+          <h2>Medical History</h2>
           <div class="form-group">
             <label>How would you describe your general health?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="healthGood"
-                  name="generalHealth"
-                  value="good"
-                />
-                <label for="healthGood">Good</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="healthFair"
-                  name="generalHealth"
-                  value="fair"
-                />
-                <label for="healthFair">Fair</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="healthPoor"
-                  name="generalHealth"
-                  value="poor"
-                />
-                <label for="healthPoor">Poor</label>
-              </div>
+              <label><input type="radio" name="generalHealth" value="good" /> Good</label>
+              <label><input type="radio" name="generalHealth" value="fair" /> Fair</label>
+              <label><input type="radio" name="generalHealth" value="poor" /> Poor</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label
-              >Have you had a major illness or been hospitalized within the last
-              5 years?</label
-            >
+            <label>Have you had a major illness or been hospitalized within the last 5 years?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="hospitalizedYes"
-                  name="hospitalized"
-                  value="yes"
-                />
-                <label for="hospitalizedYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="hospitalizedNo"
-                  name="hospitalized"
-                  value="no"
-                />
-                <label for="hospitalizedNo">No</label>
-              </div>
+              <label><input type="radio" name="hospitalized" value="yes" /> Yes</label>
+              <label><input type="radio" name="hospitalized" value="no" /> No</label>
             </div>
           </div>
 
-          <div class="conditional-field" id="hospitalizedDetails">
-            <label for="hospitalizedDescription">Please describe</label>
-            <textarea
-              id="hospitalizedDescription"
-              name="hospitalizedDescription"
-              rows="3"
-            ></textarea>
+          <div class="conditional-field" data-trigger="hospitalized">
+            <label>Please describe</label>
+            <textarea name="hospitalizedDescription" rows="3"></textarea>
           </div>
 
           <div class="form-group">
-            <label
-              >Do you have any medicine/environmental allergies or skin
-              sensitivities?</label
-            >
+            <label>Do you have any medicine/environmental allergies or skin sensitivities?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="allergiesYes"
-                  name="allergies"
-                  value="yes"
-                />
-                <label for="allergiesYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="allergiesNo"
-                  name="allergies"
-                  value="no"
-                />
-                <label for="allergiesNo">No</label>
-              </div>
+              <label><input type="radio" name="allergies" value="yes" /> Yes</label>
+              <label><input type="radio" name="allergies" value="no" /> No</label>
             </div>
           </div>
 
-          <div class="conditional-field" id="allergiesList">
-            <label for="allergiesDetails">List all allergies</label>
-            <textarea
-              id="allergiesDetails"
-              name="allergiesDetails"
-              rows="3"
-            ></textarea>
+          <div class="conditional-field" data-trigger="allergies">
+            <label>List all allergies</label>
+            <textarea name="allergiesDetails" rows="3"></textarea>
           </div>
 
           <div class="form-group">
             <label>Do you currently take any oral medications?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="oralMedsYes"
-                  name="oralMeds"
-                  value="yes"
-                />
-                <label for="oralMedsYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="oralMedsNo"
-                  name="oralMeds"
-                  value="no"
-                />
-                <label for="oralMedsNo">No</label>
-              </div>
+              <label><input type="radio" name="oralMeds" value="yes" /> Yes</label>
+              <label><input type="radio" name="oralMeds" value="no" /> No</label>
             </div>
-            <p class="help-text">
-              Includes oral hormones, birth control pills, antibiotics, blood
-              pressure meds, etc.
-            </p>
+            <p class="help-text">Includes oral hormones, birth control pills, antibiotics, blood pressure meds, etc.</p>
           </div>
 
-          <div class="conditional-field" id="oralMedsList">
-            <label for="oralMedsDetails">List all oral medications</label>
-            <textarea
-              id="oralMedsDetails"
-              name="oralMedsDetails"
-              rows="3"
-            ></textarea>
+          <div class="conditional-field" data-trigger="oralMeds">
+            <label>List all oral medications</label>
+            <textarea name="oralMedsDetails" rows="3"></textarea>
           </div>
 
           <div class="form-group">
             <label>Do you use any topical medications?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="topicalMedsYes"
-                  name="topicalMeds"
-                  value="yes"
-                />
-                <label for="topicalMedsYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="topicalMedsNo"
-                  name="topicalMeds"
-                  value="no"
-                />
-                <label for="topicalMedsNo">No</label>
-              </div>
+              <label><input type="radio" name="topicalMeds" value="yes" /> Yes</label>
+              <label><input type="radio" name="topicalMeds" value="no" /> No</label>
             </div>
-            <p class="help-text">
-              Includes Retin-A, Hydroquinone, Benzoyl Peroxide, antibiotics,
-              Metrogel, Efudex, Cortisone, etc.
-            </p>
+            <p class="help-text">Includes Retin-A, Hydroquinone, Benzoyl Peroxide, antibiotics, Metrogel, Efudex, Cortisone, etc.</p>
           </div>
 
-          <div class="conditional-field" id="topicalMedsList">
-            <label for="topicalMedsDetails">List all topical medications</label>
-            <textarea
-              id="topicalMedsDetails"
-              name="topicalMedsDetails"
-              rows="3"
-            ></textarea>
+          <div class="conditional-field" data-trigger="topicalMeds">
+            <label>List all topical medications</label>
+            <textarea name="topicalMedsDetails" rows="3"></textarea>
           </div>
 
           <div class="form-group">
-            <label for="topicalReactions"
-              >List any reactions to topical medications</label
-            >
-            <textarea
-              id="topicalReactions"
-              name="topicalReactions"
-              rows="2"
-            ></textarea>
+            <label>List any reactions to topical medications</label>
+            <textarea name="topicalReactions" rows="2"></textarea>
           </div>
 
           <div class="form-group">
             <label>Do you go to tanning beds?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="tanningBedsYes"
-                  name="tanningBeds"
-                  value="yes"
-                />
-                <label for="tanningBedsYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="tanningBedsNo"
-                  name="tanningBeds"
-                  value="no"
-                />
-                <label for="tanningBedsNo">No</label>
-              </div>
+              <label><input type="radio" name="tanningBeds" value="yes" /> Yes</label>
+              <label><input type="radio" name="tanningBeds" value="no" /> No</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Do you use self-tanner or bronzer?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="selfTannerYes"
-                  name="selfTanner"
-                  value="yes"
-                />
-                <label for="selfTannerYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="selfTannerNo"
-                  name="selfTanner"
-                  value="no"
-                />
-                <label for="selfTannerNo">No</label>
-              </div>
+              <label><input type="radio" name="selfTanner" value="yes" /> Yes</label>
+              <label><input type="radio" name="selfTanner" value="no" /> No</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Are you on any long-term antibiotics?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="longTermAntibioticsYes"
-                  name="longTermAntibiotics"
-                  value="yes"
-                />
-                <label for="longTermAntibioticsYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="longTermAntibioticsNo"
-                  name="longTermAntibiotics"
-                  value="no"
-                />
-                <label for="longTermAntibioticsNo">No</label>
-              </div>
+              <label><input type="radio" name="longTermAntibiotics" value="yes" /> Yes</label>
+              <label><input type="radio" name="longTermAntibiotics" value="no" /> No</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Have you used Accutane in the last 6 months?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="accutaneYes"
-                  name="accutane"
-                  value="yes"
-                />
-                <label for="accutaneYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="accutaneNo"
-                  name="accutane"
-                  value="no"
-                />
-                <label for="accutaneNo">No</label>
-              </div>
+              <label><input type="radio" name="accutane" value="yes" /> Yes</label>
+              <label><input type="radio" name="accutane" value="no" /> No</label>
             </div>
           </div>
 
           <div class="form-group">
             <label>Do you have tattoos, including permanent makeup?</label>
             <div class="radio-group">
-              <div class="radio-item">
-                <input
-                  type="radio"
-                  id="tattoosYes"
-                  name="tattoos"
-                  value="yes"
-                />
-                <label for="tattoosYes">Yes</label>
-              </div>
-              <div class="radio-item">
-                <input type="radio" id="tattoosNo" name="tattoos" value="no" />
-                <label for="tattoosNo">No</label>
-              </div>
+              <label><input type="radio" name="tattoos" value="yes" /> Yes</label>
+              <label><input type="radio" name="tattoos" value="no" /> No</label>
             </div>
           </div>
 
-          <div class="conditional-field" id="tattoosLocationField">
-            <label for="tattoosLocation">Where?</label>
-            <input type="text" id="tattoosLocation" name="tattoosLocation" />
+          <div class="conditional-field" data-trigger="tattoos">
+            <label>Where?</label>
+            <input type="text" name="tattoosLocation" />
           </div>
-        </div>
+        </section>
 
         <!-- Medical Conditions -->
-        <div class="section">
-          <h2 class="section-title">Medical Conditions</h2>
-          <p style="margin-bottom: 1rem; color: #666">
-            Indicate if you have ever had any of the following:
-          </p>
-          <div class="conditions-grid">
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionAIDS"
-                name="conditions"
-                value="aids-hiv"
-              />
-              <label for="conditionAIDS">AIDS/HIV</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionAnemia"
-                name="conditions"
-                value="anemia"
-              />
-              <label for="conditionAnemia">Anemia</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionAutoimmune"
-                name="conditions"
-                value="autoimmune"
-              />
-              <label for="conditionAutoimmune">Autoimmune Disorders</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionBleeding"
-                name="conditions"
-                value="bleeding"
-              />
-              <label for="conditionBleeding">Bleeding Disorders</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionColdSores"
-                name="conditions"
-                value="cold-sores"
-              />
-              <label for="conditionColdSores">Cold Sores</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionDermatitis"
-                name="conditions"
-                value="dermatitis"
-              />
-              <label for="conditionDermatitis">Dermatitis</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionDiabetes"
-                name="conditions"
-                value="diabetes"
-              />
-              <label for="conditionDiabetes">Diabetes</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionEar"
-                name="conditions"
-                value="ear-sinus"
-              />
-              <label for="conditionEar">Ear/Sinus Trouble</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionEczema"
-                name="conditions"
-                value="eczema"
-              />
-              <label for="conditionEczema">Eczema</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionEpilepsy"
-                name="conditions"
-                value="epilepsy"
-              />
-              <label for="conditionEpilepsy">Epilepsy/Seizures</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionFacialSurgery"
-                name="conditions"
-                value="facial-surgery"
-              />
-              <label for="conditionFacialSurgery"
-                >Facial Surgery/Implants</label
-              >
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionHeartCondition"
-                name="conditions"
-                value="heart-condition"
-              />
-              <label for="conditionHeartCondition">Heart Condition</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionHeartDisease"
-                name="conditions"
-                value="heart-disease"
-              />
-              <label for="conditionHeartDisease">Heart Disease</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionHepatitisA"
-                name="conditions"
-                value="hepatitis-a"
-              />
-              <label for="conditionHepatitisA">Hepatitis A</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionHepatitisB"
-                name="conditions"
-                value="hepatitis-b"
-              />
-              <label for="conditionHepatitisB">Hepatitis B</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionHepatitisC"
-                name="conditions"
-                value="hepatitis-c"
-              />
-              <label for="conditionHepatitisC">Hepatitis C</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionHerpesGenital"
-                name="conditions"
-                value="herpes-genital"
-              />
-              <label for="conditionHerpesGenital">Herpes (Genital)</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionHormone"
-                name="conditions"
-                value="hormone"
-              />
-              <label for="conditionHormone">Hormone Disorders</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionJaundice"
-                name="conditions"
-                value="jaundice"
-              />
-              <label for="conditionJaundice">Jaundice/Liver Issue</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionKeloids"
-                name="conditions"
-                value="keloids"
-              />
-              <label for="conditionKeloids">Keloids</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionLupus"
-                name="conditions"
-                value="lupus"
-              />
-              <label for="conditionLupus">Lupus</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionMethemoglobinemia"
-                name="conditions"
-                value="methemoglobinemia"
-              />
-              <label for="conditionMethemoglobinemia">Methemoglobinemia</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionNervous"
-                name="conditions"
-                value="nervous"
-              />
-              <label for="conditionNervous">Nervous Disorder</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionPCOS"
-                name="conditions"
-                value="pcos"
-              />
-              <label for="conditionPCOS">PCOS</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionPhlebitis"
-                name="conditions"
-                value="phlebitis"
-              />
-              <label for="conditionPhlebitis">Phlebitis</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionPsychiatric"
-                name="conditions"
-                value="psychiatric"
-              />
-              <label for="conditionPsychiatric">Psychiatric Care</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionRespiratory"
-                name="conditions"
-                value="respiratory"
-              />
-              <label for="conditionRespiratory">Respiratory Condition</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionRosacea"
-                name="conditions"
-                value="rosacea"
-              />
-              <label for="conditionRosacea">Rosacea</label>
-            </div>
-            <div class="checkbox-item">
-              <input
-                type="checkbox"
-                id="conditionVenereal"
-                name="conditions"
-                value="venereal"
-              />
-              <label for="conditionVenereal">Venereal Disease</label>
-            </div>
+        <section class="form-section">
+          <h2>Medical Conditions</h2>
+          <p class="section-note">Indicate if you have ever had any of the following:</p>
+          <div class="checkbox-grid">
+            <label><input type="checkbox" name="conditions" value="aids-hiv" /> AIDS/HIV</label>
+            <label><input type="checkbox" name="conditions" value="anemia" /> Anemia</label>
+            <label><input type="checkbox" name="conditions" value="autoimmune" /> Autoimmune Disorders</label>
+            <label><input type="checkbox" name="conditions" value="bleeding" /> Bleeding Disorders</label>
+            <label><input type="checkbox" name="conditions" value="cold-sores" /> Cold Sores</label>
+            <label><input type="checkbox" name="conditions" value="dermatitis" /> Dermatitis</label>
+            <label><input type="checkbox" name="conditions" value="diabetes" /> Diabetes</label>
+            <label><input type="checkbox" name="conditions" value="ear-sinus" /> Ear/Sinus Trouble</label>
+            <label><input type="checkbox" name="conditions" value="eczema" /> Eczema</label>
+            <label><input type="checkbox" name="conditions" value="epilepsy" /> Epilepsy/Seizures</label>
+            <label><input type="checkbox" name="conditions" value="facial-surgery" /> Facial Surgery/Implants</label>
+            <label><input type="checkbox" name="conditions" value="heart-condition" /> Heart Condition</label>
+            <label><input type="checkbox" name="conditions" value="heart-disease" /> Heart Disease</label>
+            <label><input type="checkbox" name="conditions" value="hepatitis-a" /> Hepatitis A</label>
+            <label><input type="checkbox" name="conditions" value="hepatitis-b" /> Hepatitis B</label>
+            <label><input type="checkbox" name="conditions" value="hepatitis-c" /> Hepatitis C</label>
+            <label><input type="checkbox" name="conditions" value="herpes-genital" /> Herpes (Genital)</label>
+            <label><input type="checkbox" name="conditions" value="hormone" /> Hormone Disorders</label>
+            <label><input type="checkbox" name="conditions" value="jaundice" /> Jaundice/Liver Issue</label>
+            <label><input type="checkbox" name="conditions" value="keloids" /> Keloids</label>
+            <label><input type="checkbox" name="conditions" value="lupus" /> Lupus</label>
+            <label><input type="checkbox" name="conditions" value="methemoglobinemia" /> Methemoglobinemia</label>
+            <label><input type="checkbox" name="conditions" value="nervous" /> Nervous Disorder</label>
+            <label><input type="checkbox" name="conditions" value="pcos" /> PCOS</label>
+            <label><input type="checkbox" name="conditions" value="phlebitis" /> Phlebitis</label>
+            <label><input type="checkbox" name="conditions" value="psychiatric" /> Psychiatric Care</label>
+            <label><input type="checkbox" name="conditions" value="respiratory" /> Respiratory Condition</label>
+            <label><input type="checkbox" name="conditions" value="rosacea" /> Rosacea</label>
+            <label><input type="checkbox" name="conditions" value="venereal" /> Venereal Disease</label>
           </div>
 
-          <div class="form-group" style="margin-top: 1.5rem">
-            <label for="conditionsExplanation"
-              >Please explain any conditions selected above</label
-            >
-            <textarea
-              id="conditionsExplanation"
-              name="conditionsExplanation"
-              rows="4"
-            ></textarea>
+          <div class="form-group">
+            <label>Please explain any conditions selected above</label>
+            <textarea name="conditionsExplanation" rows="4"></textarea>
           </div>
-        </div>
+        </section>
 
         <!-- Skin Cancer History -->
-        <div class="section">
-          <h2 class="section-title">Skin Cancer History</h2>
+        <section class="form-section">
+          <h2>Skin Cancer History</h2>
           <div class="form-group">
             <label>Have you ever had skin cancer or pre-cancer?</label>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="cancerBasel"
-                  name="skinCancer"
-                  value="basel-cell"
-                />
-                <label for="cancerBasel">Basel Cell</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="cancerDysplastic"
-                  name="skinCancer"
-                  value="dysplastic-nevus"
-                />
-                <label for="cancerDysplastic">Dysplastic Nevus</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="cancerSquamous"
-                  name="skinCancer"
-                  value="squamous-cell"
-                />
-                <label for="cancerSquamous">Squamous Cell</label>
-              </div>
-              <div class="checkbox-item">
-                <input
-                  type="checkbox"
-                  id="cancerMelanoma"
-                  name="skinCancer"
-                  value="melanoma"
-                />
-                <label for="cancerMelanoma">Melanoma</label>
-              </div>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="skinCancer" value="basel-cell" /> Basel Cell</label>
+              <label><input type="checkbox" name="skinCancer" value="dysplastic-nevus" /> Dysplastic Nevus</label>
+              <label><input type="checkbox" name="skinCancer" value="squamous-cell" /> Squamous Cell</label>
+              <label><input type="checkbox" name="skinCancer" value="melanoma" /> Melanoma</label>
             </div>
           </div>
 
-          <div
-            class="conditional-field"
-            id="skinCancerDetails"
-            style="display: block"
-          >
-            <div class="form-group">
-              <label for="cancerWhen">When</label>
-              <input
-                type="text"
-                id="cancerWhen"
-                name="cancerWhen"
-                placeholder="e.g., 2020"
-              />
-            </div>
-            <div class="form-group">
-              <label for="cancerWhere">Where on body</label>
-              <input type="text" id="cancerWhere" name="cancerWhere" />
-            </div>
-            <div class="form-group">
-              <label for="cancerTreatment">Describe treatment received</label>
-              <textarea
-                id="cancerTreatment"
-                name="cancerTreatment"
-                rows="3"
-              ></textarea>
-            </div>
+          <div class="form-group">
+            <label>When</label>
+            <input type="text" name="cancerWhen" placeholder="e.g., 2020" />
           </div>
-        </div>
+          <div class="form-group">
+            <label>Where on body</label>
+            <input type="text" name="cancerWhere" />
+          </div>
+          <div class="form-group">
+            <label>Describe treatment received</label>
+            <textarea name="cancerTreatment" rows="3"></textarea>
+          </div>
+        </section>
 
         <!-- Treatment Priorities -->
-        <div class="section">
-          <h2 class="section-title">Your Treatment Wish List</h2>
-          <p style="margin-bottom: 1rem; color: #666">
-            List your desired treatment areas in order of priority
-          </p>
-          <p class="help-text" style="margin-bottom: 1rem">
-            Potential areas: underarms, bikini line, full bikini/Brazilian,
-            legs, chin, upper lip, neck, unibrow, sideburns, full face and neck,
-            belly trail, arms, hands, chest, abdomen, back, buttocks, neckline,
-            ears
-          </p>
+        <section class="form-section">
+          <h2>Your Treatment Wish List</h2>
+          <p class="section-note">List your desired treatment areas in order of priority</p>
+          <p class="help-text">Potential areas: underarms, bikini line, full bikini/Brazilian, legs, chin, upper lip, neck, unibrow, sideburns, full face and neck, belly trail, arms, hands, chest, abdomen, back, buttocks, neckline, ears</p>
 
           <div class="priority-list">
             <div class="priority-item">
-              <div class="priority-number">1</div>
-              <input
-                type="text"
-                name="priority1"
-                placeholder="First priority treatment area"
-              />
+              <span>1</span>
+              <input type="text" name="priority1" placeholder="First priority treatment area" />
             </div>
             <div class="priority-item">
-              <div class="priority-number">2</div>
-              <input
-                type="text"
-                name="priority2"
-                placeholder="Second priority treatment area"
-              />
+              <span>2</span>
+              <input type="text" name="priority2" placeholder="Second priority treatment area" />
             </div>
             <div class="priority-item">
-              <div class="priority-number">3</div>
-              <input
-                type="text"
-                name="priority3"
-                placeholder="Third priority treatment area"
-              />
+              <span>3</span>
+              <input type="text" name="priority3" placeholder="Third priority treatment area" />
             </div>
             <div class="priority-item">
-              <div class="priority-number">4</div>
-              <input
-                type="text"
-                name="priority4"
-                placeholder="Fourth priority treatment area"
-              />
+              <span>4</span>
+              <input type="text" name="priority4" placeholder="Fourth priority treatment area" />
             </div>
             <div class="priority-item">
-              <div class="priority-number">5</div>
-              <input
-                type="text"
-                name="priority5"
-                placeholder="Fifth priority treatment area"
-              />
+              <span>5</span>
+              <input type="text" name="priority5" placeholder="Fifth priority treatment area" />
             </div>
             <div class="priority-item">
-              <div class="priority-number">6</div>
-              <input
-                type="text"
-                name="priority6"
-                placeholder="Sixth priority treatment area"
-              />
+              <span>6</span>
+              <input type="text" name="priority6" placeholder="Sixth priority treatment area" />
             </div>
           </div>
-        </div>
+        </section>
 
-        <!-- Form Actions -->
         <div class="form-actions">
-          <button type="button" class="btn btn-secondary" id="cancelBtn">
-            Cancel
-          </button>
-          <button type="submit" class="btn btn-primary">Submit Form</button>
+          <button type="button" id="resetBtn" class="btn-secondary">Reset Form</button>
+          <button type="submit" class="btn-primary">Submit Form</button>
         </div>
       </form>
     </div>
-    
-    <!-- Load the script after the HTML content -->
-    <script src="../scripts/forms/medical-history.js" defer></script>
+
+    <script src="../scripts/forms/medical-history.js"></script>
   </body>
 </html>

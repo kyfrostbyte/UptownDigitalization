@@ -1,12 +1,14 @@
 // ===== forms-wizard.js =====
 // Handles navigation, routing, and page layout
 
-// Map form keys to file paths and labels
+
 export const FORM_DEFINITIONS = {
   purchase_agreement: { label: "Purchase Agreement", path: "/forms/purchase-agreement.html" },
   medical_history: { label: "Medical History", path: "/forms/medical-history.html" },
+  skin_type_assessment: {label: "Skin Type Assessment", path: "/forms/skin-type-assessment.html" },
   informed_consent: { label: "Informed Consent", path: "/forms/informed-consent.html" },
-  e_sign_consent: { label: "E-Sign Consent", path: "/forms/e-sign-consent.html" },
+  privacy_practices: { label: "Privacy Practices", path: "/forms/privacy-practices.html" },
+  media_release: { label: "Media Release", path: "/forms/media-release.html" }
 };
 // Get URL parameters
 const urlParams = new URLSearchParams(window.location.search);

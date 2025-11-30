@@ -1,334 +1,145 @@
-// Wait for the form to be loaded into the DOM
-function initMedicalHistoryForm(shouldExist = false) {
-  const form = document.getElementById("medicalHistoryForm");
+// Medical History Form JavaScript
 
- 
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('medicalHistoryForm');
+  const resetBtn = document.getElementById('resetBtn');
 
-  if (!form) {
-    // Only log error if the form was expected to exist (i.e., user navigated to it)
-    if (shouldExist) {
-      console.error("Medical history form not found in DOM");
-    }
-    return;
-  }
+  // Handle conditional fields
+  function setupConditionalFields() {
+    // Radio button triggers
+    const radioTriggers = {
+      'previousTreatments': 'yes',
+      'useSkincare': 'yes',
+      'physicianCare': 'yes',
+      'hairRemoval': 'yes',
+      'hospitalized': 'yes',
+      'allergies': 'yes',
+      'oralMeds': 'yes',
+      'topicalMeds': 'yes',
+      'tattoos': 'yes'
+    };
 
-  // Track if form has been submitted at least once
-  let formSubmitted = false;
+    Object.keys(radioTriggers).forEach(name => {
+      const radios = document.querySelectorAll(`input[name="${name}"]`);
+      const triggerValue = radioTriggers[name];
+      const conditionalField = document.querySelector(`.conditional-field[data-trigger="${name}"]`);
 
-// Show/hide conditional fields based on responses
-function setupConditionalFields() {
-  // Friend/Family referral
-  document.getElementById("hearFriend").addEventListener("change", (e) => {
-    document
-      .getElementById("friendNameField")
-      .classList.toggle("visible", e.target.checked);
-  });
+      if (radios.length && conditionalField) {
+        radios.forEach(radio => {
+          radio.addEventListener('change', function() {
+            if (this.value === triggerValue && this.checked) {
+              conditionalField.classList.add('show');
+            } else {
+              conditionalField.classList.remove('show');
+            }
+          });
+        });
+      }
+    });
 
-  // Physician referral
-  document.getElementById("hearPhysician").addEventListener("change", (e) => {
-    document
-      .getElementById("physicianNameField")
-      .classList.toggle("visible", e.target.checked);
-  });
+    // Checkbox triggers for "How did you hear about us"
+    const friendCheckbox = document.querySelector('input[name="hearAbout"][value="friend"]');
+    const physicianCheckbox = document.querySelector('input[name="hearAbout"][value="physician"]');
+    const friendField = document.querySelector('.conditional-field[data-trigger="friend"]');
+    const physicianField = document.querySelector('.conditional-field[data-trigger="physician"]');
 
-  // Previous treatments
-  document
-    .querySelectorAll('input[name="previousTreatments"]')
-    .forEach((radio) => {
-      radio.addEventListener("change", (e) => {
-        document
-          .getElementById("previousTreatmentsDetails")
-          .classList.toggle("visible", e.target.value === "yes");
+    if (friendCheckbox && friendField) {
+      friendCheckbox.addEventListener('change', function() {
+        friendField.classList.toggle('show', this.checked);
       });
-    });
+    }
 
-  // Women only section - show if gender is female
-  document.querySelectorAll('input[name="gender"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document.getElementById("womenOnlySection").style.display =
-        e.target.value === "female" ? "block" : "none";
-    });
-  });
-
-  // Skincare products
-  document.querySelectorAll('input[name="useSkincare"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("skincareProductsField")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-
-  // Physician care
-  document.querySelectorAll('input[name="physicianCare"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("physicianCareDetails")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-
-  // Hair removal date
-  document.querySelectorAll('input[name="hairRemoval"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("hairRemovalDateField")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-
-  // Hospitalized
-  document.querySelectorAll('input[name="hospitalized"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("hospitalizedDetails")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-
-  // Allergies
-  document.querySelectorAll('input[name="allergies"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("allergiesList")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-
-  // Oral medications
-  document.querySelectorAll('input[name="oralMeds"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("oralMedsList")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-
-  // Topical medications
-  document.querySelectorAll('input[name="topicalMeds"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("topicalMedsList")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-
-  // Tattoos
-  document.querySelectorAll('input[name="tattoos"]').forEach((radio) => {
-    radio.addEventListener("change", (e) => {
-      document
-        .getElementById("tattoosLocationField")
-        .classList.toggle("visible", e.target.value === "yes");
-    });
-  });
-}
-
-// Phone number formatting
-function formatPhoneNumber(input) {
-  let value = input.value.replace(/\D/g, "");
-  if (value.length >= 10) {
-    value = value.substring(0, 10);
-    input.value = value.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-  } else {
-    input.value = value;
-  }
-}
-
-document.querySelectorAll('input[type="tel"]').forEach((input) => {
-  input.addEventListener("input", () => formatPhoneNumber(input));
-});
-
-// Add real-time validation for email after user starts typing
-document.getElementById("email").addEventListener("blur", function() {
-  if (formSubmitted && this.value) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const formGroup = this.closest(".form-group");
-    if (!emailRegex.test(this.value)) {
-      formGroup.classList.add("error");
-    } else {
-      formGroup.classList.remove("error");
+    if (physicianCheckbox && physicianField) {
+      physicianCheckbox.addEventListener('change', function() {
+        physicianField.classList.toggle('show', this.checked);
+      });
     }
   }
-});
 
-// Remove error styling when user starts fixing required fields
-form.querySelectorAll("[required]").forEach((field) => {
-  field.addEventListener("input", function() {
-    if (formSubmitted && this.value.trim()) {
-      this.closest(".form-group").classList.remove("error");
+  // Handle Women Only section visibility
+  function setupGenderSection() {
+    const genderRadios = document.querySelectorAll('input[name="gender"]');
+    const womenSection = document.querySelector('.form-section[data-gender="female"]');
+
+    if (genderRadios.length && womenSection) {
+      genderRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          if (this.value === 'female') {
+            womenSection.style.display = 'block';
+          } else {
+            womenSection.style.display = 'none';
+          }
+        });
+      });
     }
-  });
-});
+  }
 
-// Form validation
-function validateForm() {
-  let isValid = true;
-  const requiredFields = form.querySelectorAll("[required]");
+  // Form submission
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
 
-  requiredFields.forEach((field) => {
-    const formGroup = field.closest(".form-group");
+    // Check required fields
+    const requiredInputs = form.querySelectorAll('input[required]');
+    let allFilled = true;
 
-    if (!field.value.trim()) {
-      if (formSubmitted) {
-        formGroup.classList.add("error");
+    requiredInputs.forEach(input => {
+      if (!input.value.trim()) {
+        allFilled = false;
+        input.style.borderColor = '#dc3545';
+      } else {
+        input.style.borderColor = '#ddd';
       }
-      isValid = false;
-    } else {
-      formGroup.classList.remove("error");
+    });
+
+    if (!allFilled) {
+      alert('Please fill in all required fields (marked with *).');
+      return;
     }
+
+    // Get form data
+    const formData = new FormData(form);
+    const data = {};
+
+    for (let [key, value] of formData.entries()) {
+      if (data[key]) {
+        if (Array.isArray(data[key])) {
+          data[key].push(value);
+        } else {
+          data[key] = [data[key], value];
+        }
+      } else {
+        data[key] = value;
+      }
+    }
+
+    // Here you would typically send the data to a server
+    console.log('Form Data:', data);
+
+    alert('Medical History Form submitted successfully!\n\nThank you for completing the form.');
+
+    // Optional: Reset form or redirect
+    // form.reset();
   });
 
-  // Email validation
-  const emailField = document.getElementById("email");
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (emailField.value && !emailRegex.test(emailField.value)) {
-    if (formSubmitted) {
-      emailField.closest(".form-group").classList.add("error");
-    }
-    isValid = false;
-  } else if (emailField.value) {
-    emailField.closest(".form-group").classList.remove("error");
-  }
-
-  // Age validation (must be at least 13 years old)
-  const birthdateField = document.getElementById("birthdate");
-  if (birthdateField.value) {
-    const birthDate = new Date(birthdateField.value);
-    const today = new Date();
-    const age = today.getFullYear() - birthDate.getFullYear();
-
-    if (age < 13) {
-      if (formSubmitted) {
-        alert("Patient must be at least 13 years old.");
-      }
-      isValid = false;
-    }
-  }
-
-  return isValid;
-}
-
-// Form submission
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  
-  // Mark that form has been submitted
-  formSubmitted = true;
-
-  if (!validateForm()) {
-    alert("Please fill in all required fields correctly.");
-    return;
-  }
-
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-
-  // Collect checkbox groups
-  const hearAbout = [];
-  formData.getAll("hearAbout").forEach((val) => hearAbout.push(val));
-  data.hearAbout = hearAbout;
-
-  const skinProducts = [];
-  formData.getAll("skinProducts").forEach((val) => skinProducts.push(val));
-  data.skinProducts = skinProducts;
-
-  const skinTreatments = [];
-  formData.getAll("skinTreatments").forEach((val) => skinTreatments.push(val));
-  data.skinTreatments = skinTreatments;
-
-  const injectables = [];
-  formData.getAll("injectables").forEach((val) => injectables.push(val));
-  data.injectables = injectables;
-
-  const conditions = [];
-  formData.getAll("conditions").forEach((val) => conditions.push(val));
-  data.conditions = conditions;
-
-  const skinCancer = [];
-  formData.getAll("skinCancer").forEach((val) => skinCancer.push(val));
-  data.skinCancer = skinCancer;
-
-  console.log("Form data:", data);
-
-  // The form submission will be handled by forms-common.js
-  // which listens for submit events on the container
-});
-
-// Cancel button
-const cancelBtn = document.getElementById("cancelBtn");
-if (cancelBtn) {
-  cancelBtn.addEventListener("click", () => {
-    if (
-      confirm("Are you sure you want to cancel? All entered data will be lost.")
-    ) {
+  // Reset form
+  resetBtn.addEventListener('click', function() {
+    if (confirm('Are you sure you want to reset the form? All information will be cleared.')) {
       form.reset();
-      // Clear any draft data
-      localStorage.removeItem(autoSaveKey);
-      // Just reset the form without navigating away
+      
+      // Hide all conditional fields
+      document.querySelectorAll('.conditional-field').forEach(field => {
+        field.classList.remove('show');
+      });
+
+      // Hide women only section
+      const womenSection = document.querySelector('.form-section[data-gender="female"]');
+      if (womenSection) {
+        womenSection.style.display = 'none';
+      }
     }
   });
-}
 
-// Initialize conditional field handlers
-setupConditionalFields();
-
-// // Auto-save to localStorage (optional)
-// const autoSaveKey = "medicalHistoryFormDraft";
-
-// // Load saved draft
-// const savedDraft = localStorage.getItem(autoSaveKey);
-// if (savedDraft) {
-//   if (confirm("A saved draft was found. Would you like to restore it?")) {
-//     const data = JSON.parse(savedDraft);
-//     Object.keys(data).forEach((key) => {
-//       const field = form.elements[key];
-//       if (field) {
-//         if (field.type === "radio" || field.type === "checkbox") {
-//           if (Array.isArray(data[key])) {
-//             data[key].forEach((val) => {
-//               const input = form.querySelector(
-//                 `input[name="${key}"][value="${val}"]`
-//               );
-//               if (input) input.checked = true;
-//             });
-//           } else {
-//             const input = form.querySelector(
-//               `input[name="${key}"][value="${data[key]}"]`
-//             );
-//             if (input) input.checked = true;
-//           }
-//         } else {
-//           field.value = data[key];
-//         }
-//       }
-//     });
-//   }
-// }
-
-// Save draft periodically
-setInterval(() => {
-  const formData = new FormData(form);
-  const data = Object.fromEntries(formData.entries());
-  localStorage.setItem(autoSaveKey, JSON.stringify(data));
-}, 30000); // Save every 30 seconds
-
-// Clear draft on successful submission
-form.addEventListener("submit", () => {
-  localStorage.removeItem(autoSaveKey);
+  // Initialize
+  setupConditionalFields();
+  setupGenderSection();
 });
-}
-
-// Listen for the form to be loaded by the form wizard
-document.addEventListener('formLoaded', (e) => {
-  if (e.detail.formKey === 'medical_history') {
-    // Small delay to ensure DOM is fully updated
-    setTimeout(() => initMedicalHistoryForm(true), 10);
-  }
-});
-
-// Also initialize if the form is already in the DOM (for standalone usage)
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initMedicalHistoryForm);
-} else {
-  initMedicalHistoryForm();
-}

@@ -17,8 +17,10 @@ let currentClientName = "";
 const FORM_DEFINITIONS = {
   purchase_agreement: { label: "Purchase Agreement" },
   medical_history: { label: "Medical History" },
+  skin_type_assessment: {label: "Skin Type Assessment"},
   informed_consent: { label: "Informed Consent" },
-  e_sign_consent: { label: "E-Sign Consent" },
+  privacy_practices: { label: "Privacy Practices" },
+  media_release: { label: "Media Release"}
 };
 
 // Close modal handlers

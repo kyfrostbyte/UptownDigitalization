@@ -231,7 +231,6 @@
     }
 
     .search-box::before {
-      content: "🔍";
       position: absolute;
       left: 0.875rem;
       top: 50%;
@@ -294,14 +293,14 @@
 </head>
 <body>
   <header>
-    <h1>🛠️ Admin Panel</h1>
+    <h1>Admin Panel</h1>
   </header>
 
   <div class="container">
     <!-- Add New Client Section -->
     <section class="section">
       <div class="section-header">
-        <h2>➕ Add New Client</h2>
+        <h2>Add New Client</h2>
       </div>
       
       <form id="addClientForm">
@@ -330,8 +329,8 @@
     <!-- Recent Clients Section -->
     <section class="section">
       <div class="section-header">
-        <h2>📋 Recent Clients</h2>
-        <button class="btn-secondary btn-sm" onclick="loadClients()">🔄 Refresh</button>
+        <h2>Recent Clients</h2>
+        <button class="btn-secondary btn-sm" onclick="loadClients()">Refresh</button>
       </div>
       
       <div class="table-wrapper">
@@ -354,7 +353,7 @@
     <!-- Manage Forms Section -->
     <section class="section">
       <div class="section-header">
-        <h2>📝 Manage Client Forms</h2>
+        <h2>Manage Client Forms</h2>
       </div>
       
       <div class="search-box">
@@ -370,7 +369,9 @@
               <th>Informed Consent</th>
               <th>Medical History</th>
               <th>Privacy Practices</th>
-              <th>E-sign Consent</th>
+              <th>Media Release</th>
+              <th>Skin Type Assessment</th>
+              <th>Purchase Agreement</th>
             </tr>
           </thead>
           <tbody>
@@ -383,7 +384,7 @@
     <!-- SQL Query Section -->
     <section class="section">
       <div class="section-header">
-        <h2>💻 Database Query</h2>
+        <h2>Database Query</h2>
       </div>
 
       <div style="margin-bottom: 1rem;">
@@ -403,7 +404,7 @@
         <textarea id="sqlQuery" rows="6" placeholder="Enter your SQL query here...&#10;Example: SELECT * FROM clients WHERE email LIKE '%@example.com'"></textarea>
       </div>
       
-      <button class="btn-primary" id="executeQuery">▶️ Execute Query</button>
+      <button class="btn-primary" id="executeQuery">▶Execute Query</button>
       <button class="btn-secondary" onclick="document.getElementById('sqlQuery').value = ''; document.getElementById('sqlResultsTable').querySelector('tbody').innerHTML = ''; document.getElementById('sqlResultsTable').querySelector('thead').innerHTML = '';">Clear</button>
 
       <div style="margin-top: 2rem;">
@@ -526,8 +527,10 @@
                       token: 'pending',
                       informed_consent: 0, 
                       medical_history: 0, 
-                      privacy_practices_notices: 0, 
-                      e_sign_consent: 0 
+                      privacy_practices: 0, 
+                      skin_type_assessment: 0,
+                      purchase_agreement: 0,
+                      media_release: 0
                     }];
                   }
 
@@ -543,10 +546,16 @@
                         <input type="checkbox" data-field="medical_history" ${f.medical_history ? 'checked' : ''}>
                       </td>
                       <td style="text-align: center;">
-                        <input type="checkbox" data-field="privacy_practices_notices" ${f.privacy_practices_notices ? 'checked' : ''}>
+                        <input type="checkbox" data-field="privacy_practices_notices" ${f.privacy_practices ? 'checked' : ''}>
                       </td>
                       <td style="text-align: center;">
-                        <input type="checkbox" data-field="e_sign_consent" ${f.e_sign_consent ? 'checked' : ''}>
+                        <input type="checkbox" data-field="e_sign_consent" ${f.media_release ? 'checked' : ''}>
+                      </td>
+                       <td style="text-align: center;">
+                        <input type="checkbox" data-field="e_sign_consent" ${f.skin_type_assessment ? 'checked' : ''}>
+                      </td>
+                       <td style="text-align: center;">
+                        <input type="checkbox" data-field="e_sign_consent" ${f.purchase_agreement ? 'checked' : ''}>
                       </td>
                     `;
                     
