@@ -135,6 +135,7 @@ td {
   cursor: pointer;
   transition: all 0.2s;
   font-size: 18px;
+  position: relative;
 }
 
 .status-icon.submitted {
@@ -151,11 +152,20 @@ td {
 .status-icon.not-submitted {
   background-color: #f8d7da;
   color: #dc3545;
+  cursor: pointer;
 }
 
 .status-icon.not-submitted:hover {
-  background-color: #ffc107;
+  background-color: #17a2b8;
+  color: white;
   transform: scale(1.1);
+}
+
+.status-icon.not-submitted:hover::after {
+  content: "📤";
+  position: absolute;
+  font-size: 12px;
+  margin-top: -2px;
 }
 
 .loading-row td {

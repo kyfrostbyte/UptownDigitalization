@@ -36,7 +36,14 @@ export const FORM_DEFINITIONS = {
 
 // Get URL parameters
 const urlParams = new URLSearchParams(window.location.search);
-const token = urlParams.get("token");
+// Extract token from URL path: /form-wizard/{token} OR from query param: ?token=xxx
+const pathParts = window.location.pathname.split('/');
+const tokenFromPath = pathParts[pathParts.length - 1];
+// Check if token is in path (and not empty/html file) or fall back to query param
+const token = (tokenFromPath && tokenFromPath !== 'form-wizard.html' && !tokenFromPath.includes('.html')) 
+  ? tokenFromPath 
+  : urlParams.get("token");
+const singleFormParam = urlParams.get("form"); // Check if we should show only one form
 
 if (!token) {
   document.getElementById("formContainer").innerHTML =
@@ -99,6 +106,12 @@ async function loadForm(key) {
 
 // Navigate to next form or completion screen
 async function navigateToNextFormOrComplete() {
+  // If this is a single-form mode, just show completion
+  if (singleFormParam) {
+    showCompletionScreen();
+    return;
+  }
+
   try {
     const response = await fetch(`/client/${token}`);
     const data = await response.json();
@@ -161,7 +174,13 @@ container.addEventListener("submit", async (e) => {
     const formData = new FormData(formEl);
     const formDataObj = Object.fromEntries(formData.entries());
 
-    const formType = title.textContent.toLowerCase().replace(/ /g, "_");
+    // Get the form type from the active navigation or single form param
+    let formType;
+    if (singleFormParam) {
+      formType = singleFormParam;
+    } else {
+      formType = title.textContent.toLowerCase().replace(/ /g, "_");
+    }
 
     const response = await fetch(`/submit-form/${token}`, {
       method: "POST",
@@ -174,6 +193,16 @@ container.addEventListener("submit", async (e) => {
     });
 
     if (response.ok) {
+      // Update the forms_status table to mark this form as complete
+      await fetch(`/forms/update/${token}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          field: formType,
+          value: true,
+        }),
+      });
+
       // Show success message
       const successMsg = document.createElement("div");
       successMsg.className = "success-message";
@@ -206,6 +235,36 @@ container.addEventListener("submit", async (e) => {
 // Initialize wizard on load
 async function initializeWizard() {
   try {
+    // If single form mode, only show that form
+    if (singleFormParam) {
+      // Validate the form exists
+      if (!FORM_DEFINITIONS[singleFormParam]) {
+        container.innerHTML = `
+          <div class="error-message">
+            Invalid form specified. Please contact support.
+          </div>
+        `;
+        return;
+      }
+
+      // Hide navigation for single form mode
+      nav.style.display = 'none';
+      navToggle.style.display = 'none';
+
+      // Create a single nav item (hidden but needed for form tracking)
+      const formDef = FORM_DEFINITIONS[singleFormParam];
+      const link = document.createElement("a");
+      link.href = "#";
+      link.dataset.formKey = singleFormParam;
+      link.classList.add("active");
+      nav.appendChild(link);
+
+      // Load the single form directly
+      await loadForm(singleFormParam);
+      return;
+    }
+
+    // Normal multi-form wizard mode
     const response = await fetch(`/client/${token}`);
     const data = await response.json();
 
@@ -256,7 +315,7 @@ async function initializeWizard() {
 
       // Create landing page button WITH icon
       const btn = document.createElement("button");
-      btn.classList.add("landing-btn"); // optional, but recommended
+      btn.classList.add("landing-btn");
 
       const btnIcon = document.createElement("span");
       btnIcon.classList.add("icon");

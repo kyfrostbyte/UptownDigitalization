@@ -17,7 +17,7 @@ const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
 
-const client = twilio(accountSid, authToken);
+const twilioClient = twilio(accountSid, authToken);
 const db = new sqlite3.Database('mydev.db');
 
 // Enable foreign keys
@@ -93,7 +93,7 @@ async function initializeTables() {
       )
     `);
 
-    console.log('✓ Tables initialized successfully');
+    console.log('Tables initialized successfully');
   } catch (err) {
     console.error('Error initializing tables:', err);
     throw err;
@@ -129,10 +129,10 @@ async function seedDatabase() {
         [token, clientId, 0, 0, 0, 0, 0, 0, 0]
       );
 
-      console.log(`  ✓ Created client: ${client.first_name} ${client.last_name} (token: ${token})`);
+      console.log(`Created client: ${client.first_name} ${client.last_name} (token: ${token})`);
     }
 
-    console.log('✓ Database seeded successfully');
+    console.log('Database seeded successfully');
   } catch (err) {
     console.error('Error seeding database:', err);
     throw err;
@@ -192,7 +192,80 @@ async function resetDatabase() {
 
 // ===================== API ENDPOINTS =====================
 
-// Twilio send forms link
+// Form label mapping
+const FORM_LABELS = {
+  purchase_agreement: 'Purchase Agreement',
+  medical_history: 'Medical History',
+  skin_type_assessment: 'Skin Type Assessment',
+  informed_consent: 'Informed Consent',
+  privacy_practices: 'Privacy Practices',
+  media_release: 'Media Release'
+};
+
+// Send a single form to client
+app.post('/send-single-form', async (req, res) => {
+  const { clientId, formType, token } = req.body;
+
+  if (!clientId || !formType || !token) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Missing required fields' 
+    });
+  }
+
+  try {
+    // Get client information
+    const client = await dbGet('SELECT * FROM clients WHERE id = ?', [clientId]);
+    
+    if (!client) {
+      return res.status(404).json({ 
+        success: false, 
+        message: 'Client not found' 
+      });
+    }
+
+    if (!client.phone) {
+      return res.status(400).json({ 
+        success: false, 
+        message: 'Client has no phone number' 
+      });
+    }
+
+    // Create the form URL with the specific form type
+    const baseUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}`;
+    const formUrl = `${baseUrl}/form-wizard/${token}?form=${formType}`;
+    
+    const formLabel = FORM_LABELS[formType] || formType;
+    
+    // Create SMS message
+    const smsMessage = `Hi ${client.first_name},\n\nPlease complete your ${formLabel} using this secure link:\n\n${formUrl}\n\nThank you!\n- Uptown Laser`;
+    
+    // Send SMS via Twilio
+    await twilioClient.messages.create({
+      body: smsMessage,
+      from: twilioPhone,
+      to: client.phone
+    });
+    
+    console.log(`Sent ${formLabel} to ${client.first_name} ${client.last_name} at ${client.phone}`);
+    
+    res.json({ 
+      success: true,
+      message: `${formLabel} sent successfully`,
+      sentTo: client.phone,
+      url: formUrl
+    });
+
+  } catch (error) {
+    console.error('Error sending single form:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: error.message 
+    });
+  }
+});
+
+// Twilio send forms link (send all forms)
 app.post('/send-forms', async (req, res) => {
   const { clientName, phone, url } = req.body;
 
@@ -206,7 +279,7 @@ app.post('/send-forms', async (req, res) => {
   try {
     const smsMessage = `Hi ${clientName},\n\nPlease complete your forms using this secure link:\n\n${url}\n\nThank you!`;
     
-    await client.messages.create({
+    await twilioClient.messages.create({
       body: smsMessage,
       from: twilioPhone,
       to: phone
@@ -609,22 +682,5 @@ app.use((req, res) => {
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`
-╔════════════════════════════════════════╗
-║  Server running on port ${PORT}          ║
-║  http://localhost:${PORT}                 ║
-║                                        ║
-║  API Endpoints:                        ║
-║  • GET  /clients                       ║
-║  • POST /clients                       ║
-║  • GET  /forms/:client_id              ║
-║  • PATCH /forms/update/:token          ║
-║  • GET  /client/:token                 ║
-║  • POST /submit-form/:token            ║
-║                                        ║
-║  Commands:                             ║
-║  • node server.js --reset              ║
-║  • RESET_DB=true node server.js        ║
-╚════════════════════════════════════════╝
-  `);
+  console.log(`Server running on port ${PORT}`);
 });

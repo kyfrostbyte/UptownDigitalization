@@ -132,8 +132,8 @@ function renderTable(clients) {
         <td>
           <div 
             class="status-icon ${isSubmitted ? 'submitted' : 'not-submitted'}"
-            ${isSubmitted ? `onclick="openFormModal(${client.id}, '${formKey}')"` : ''}
-            title="${isSubmitted ? 'Click to view/edit' : 'Not submitted'}"
+            onclick="${isSubmitted ? `openFormModal(${client.id}, '${formKey}')` : `sendSingleForm(${client.id}, '${formKey}')`}"
+            title="${isSubmitted ? 'Click to view/edit' : 'Click to send this form'}"
           >
             ${isSubmitted ? '✓' : '✗'}
           </div>
@@ -150,6 +150,75 @@ function renderTable(clients) {
       </tr>
     `;
   }).join('');
+}
+
+// Send a single form to client
+async function sendSingleForm(clientId, formType) {
+  try {
+    const client = allClientsData.find(c => c.id === clientId);
+    
+    if (!client) {
+      alert('Client not found');
+      return;
+    }
+
+    // Get the form token for this client
+    const formData = client.forms;
+    const token = formData.token;
+
+    if (!token) {
+      alert('No form token found for this client');
+      return;
+    }
+
+    const formLabel = FORM_DEFINITIONS[formType].label;
+    
+    // Confirm before sending
+    const confirmed = confirm(
+      `Send ${formLabel} to ${client.first_name} ${client.last_name}?\n\n` +
+      `Phone: ${client.phone}`
+    );
+
+    if (!confirmed) return;
+
+    // Show loading state
+    const originalText = event.target.textContent;
+    event.target.textContent = '⏳';
+    event.target.style.pointerEvents = 'none';
+
+    // Send the form via SMS
+    const response = await fetch('/send-single-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        clientId: clientId,
+        formType: formType,
+        token: token
+      })
+    });
+
+    const result = await response.json();
+    console.log(result);
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Failed to send form');
+    }
+
+    alert(`${formLabel} sent successfully to ${client.first_name} ${client.last_name}!`);
+    
+    // Reload data to update UI
+    await loadClientsData();
+
+  } catch (err) {
+    console.error('Error sending form:', err);
+    alert(`Failed to send form: ${err.message}`);
+    
+    // Reset the icon
+    if (event && event.target) {
+      event.target.textContent = '✗';
+      event.target.style.pointerEvents = '';
+    }
+  }
 }
 
 // Open form modal
@@ -407,5 +476,6 @@ function showError(message) {
   `;
 }
 
-// Make function available globally
+// Make functions available globally
 window.openFormModal = openFormModal;
+window.sendSingleForm = sendSingleForm;
