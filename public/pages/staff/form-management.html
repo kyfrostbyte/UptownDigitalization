@@ -1,92 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Form Management - Uptown Laser</title>
-  <link rel="stylesheet" href="../../styles/staff/form-management.css" />
-</head>
-<body>
-  <div class="page-container">
-    <header class="page-header">
-      <h1>Form Management</h1>
-      <p>View and manage client form submissions</p>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Management - Uptown Laser</title>
+    <link rel="stylesheet" href="../../styles/staff/form-management.css" />
+  </head>
+  <body>
+    <div class="page-container">
+      <header class="page-header">
+        <h1>Form Management</h1>
+        <p>View and manage client form submissions</p>
+      </header>
 
-    <!-- Search and Filter Controls -->
-    <div class="controls-bar">
-      <div class="search-box">
-        <input 
-          type="text" 
-          id="searchInput" 
-          placeholder="Search by name, email, or phone..." 
-        />
+      <!-- Search and Filter Controls -->
+      <div class="controls-bar">
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by name, email, or phone..."
+          />
+        </div>
+
+        <div class="filter-group">
+          <select id="filterForm">
+            <option value="">All Forms</option>
+            <option value="completed">Completed Only</option>
+            <option value="incomplete">Incomplete Only</option>
+          </select>
+
+          <select id="sortBy">
+            <option value="name">Sort by Name</option>
+            <option value="email">Sort by Email</option>
+            <option value="recent">Most Recent</option>
+          </select>
+        </div>
       </div>
-      
-      <div class="filter-group">
-        <select id="filterForm">
-          <option value="">All Forms</option>
-          <option value="completed">Completed Only</option>
-          <option value="incomplete">Incomplete Only</option>
-        </select>
-        
-        <select id="sortBy">
-          <option value="name">Sort by Name</option>
-          <option value="email">Sort by Email</option>
-          <option value="recent">Most Recent</option>
-        </select>
+
+      <!-- Forms Table -->
+      <div class="table-container">
+        <table id="formsTable">
+          <thead>
+            <tr>
+              <th>Client Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Purchase Agreement</th>
+              <th>Medical History</th>
+              <th>Skin Type</th>
+              <th>Informed Consent</th>
+              <th>Privacy Practices</th>
+              <th>Media Release</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr class="loading-row">
+              <td colspan="9">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="noResults" class="no-results" style="display: none">
+        No clients found matching your criteria.
+      </div>
+    </div>
+
+    <!-- Form Viewing/Editing Modal -->
+    <div id="formModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">Form Details</h2>
+          <button class="close-btn" id="closeModal">&times;</button>
+        </div>
+
+        <div class="modal-body" id="modalBody">
+          <!-- Form content gonna go here -->
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn-secondary" id="cancelBtn">Cancel</button>
+          <button class="btn-primary" id="saveBtn">Save Changes</button>
+        </div>
       </div>
     </div>
 
-    <!-- Forms Table -->
-    <div class="table-container">
-      <table id="formsTable">
-        <thead>
-          <tr>
-            <th>Client Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Purchase Agreement</th>
-            <th>Medical History</th>
-            <th>Skin Type</th>
-            <th>Informed Consent</th>
-            <th>Privacy Practices</th>
-            <th>Media Release</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <tr class="loading-row">
-            <td colspan="9">Loading...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- No Results Message -->
-    <div id="noResults" class="no-results" style="display: none;">
-      No clients found matching your criteria.
-    </div>
-  </div>
-
-  <!-- Modal for Form Viewing/Editing -->
-  <div id="formModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modalTitle">Form Details</h2>
-        <button class="close-btn" id="closeModal">&times;</button>
-      </div>
-      
-      <div class="modal-body" id="modalBody">
-        <!-- Form content will be injected here -->
-      </div>
-      
-      <div class="modal-footer">
-        <button class="btn-secondary" id="cancelBtn">Cancel</button>
-        <button class="btn-primary" id="saveBtn">Save Changes</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="../../scripts/staff/form-management.js"></script>
-</body>
+    <script src="../../scripts/staff/form-management.js"></script>
+  </body>
 </html>

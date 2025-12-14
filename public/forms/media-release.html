@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Media Release Form</title>
     <link rel="stylesheet" href="../styles/forms/media-release.css" />
+    <link rel="stylesheet" href="../styles/common.css" />
   </head>
   <body>
     <div class="form-container">
@@ -18,17 +19,19 @@
         <section class="form-section">
           <div class="intro-box">
             <p class="intro-text">
-              I grant permission to Uptown Laser Hair Removal to use my photos and/or 
-              videos in their media for marketing including social media, prints, website, and other forms.
+              I grant permission to Uptown Laser Hair Removal to use my photos
+              and/or videos in their media for marketing including social media,
+              prints, website, and other forms.
             </p>
           </div>
 
           <div class="waiver-box">
             <p>
-              I hereby waive any right to inspect or approve the finished photographs or electronic matter that 
-              may be used in conjunction with them now or in the future, whether that use is known to me or 
-              unknown, and I waive any right to royalties or other compensation arising from or related to the 
-              use of the image(s) and video(s).
+              I hereby waive any right to inspect or approve the finished
+              photographs or electronic matter that may be used in conjunction
+              with them now or in the future, whether that use is known to me or
+              unknown, and I waive any right to royalties or other compensation
+              arising from or related to the use of the image(s) and video(s).
             </p>
           </div>
         </section>
@@ -36,20 +39,31 @@
         <!-- Age and Status Selection -->
         <section class="form-section">
           <h2>Please Initial the Applicable Paragraph</h2>
-          
+
           <div class="status-options">
             <div class="status-option">
               <div class="initial-box">
-                <input type="text" name="adultInitials" class="initial-input" maxlength="4" placeholder="Initials" />
+                <input
+                  type="text"
+                  name="adultInitials"
+                  class="initial-input"
+                  maxlength="4"
+                  placeholder="Initials"
+                />
               </div>
               <div class="status-text">
                 <p>
-                  <strong>I am 18 years of age or older and I am competent to contract in my own name.</strong> 
-                  I have read this release before signing below, and I fully understand the contents, meaning 
-                  and impact of this release. I understand that I am free to address any specific questions 
-                  regarding this release by submitting those questions in writing prior to signing, and I agree 
-                  that my failure to do so will be interpreted as a free and knowledgeable acceptance of the 
-                  terms of this release.
+                  <strong
+                    >I am 18 years of age or older and I am competent to
+                    contract in my own name.</strong
+                  >
+                  I have read this release before signing below, and I fully
+                  understand the contents, meaning and impact of this release. I
+                  understand that I am free to address any specific questions
+                  regarding this release by submitting those questions in
+                  writing prior to signing, and I agree that my failure to do so
+                  will be interpreted as a free and knowledgeable acceptance of
+                  the terms of this release.
                 </p>
               </div>
             </div>
@@ -58,54 +72,79 @@
 
             <div class="status-option">
               <div class="initial-box">
-                <input type="text" name="guardianInitials" class="initial-input" maxlength="4" placeholder="Initials" />
+                <input
+                  type="text"
+                  name="guardianInitials"
+                  class="initial-input"
+                  maxlength="4"
+                  placeholder="Initials"
+                />
               </div>
               <div class="status-text">
                 <p>
-                  <strong>I am the parent or legal guardian of the above named client.</strong> 
-                  I have read this release before signing below, and I fully understand the contents, meaning 
-                  and impact of this release. I understand that I am free to address any specific questions 
-                  regarding this release by submitting those questions in writing prior to signing, and I agree 
-                  that my failure to do so will be interpreted as a free and knowledgeable acceptance of the 
-                  terms of this release.
+                  <strong
+                    >I am the parent or legal guardian of the above named
+                    client.</strong
+                  >
+                  I have read this release before signing below, and I fully
+                  understand the contents, meaning and impact of this release. I
+                  understand that I am free to address any specific questions
+                  regarding this release by submitting those questions in
+                  writing prior to signing, and I agree that my failure to do so
+                  will be interpreted as a free and knowledgeable acceptance of
+                  the terms of this release.
                 </p>
               </div>
             </div>
           </div>
 
           <div class="note-box">
-            <strong>Note:</strong> Please initial only the paragraph that applies to your situation.
+            <strong>Note:</strong> Please initial only the paragraph that
+            applies to your situation.
           </div>
         </section>
 
         <!-- Signature Section -->
         <section class="signature-section">
-          <h2>Signature</h2>
-          
-         <div class="signature-group">
-            <label>Full Name: <span class="required">*</span></label>
-            <input type="text" name="namePrinted" class="text-input" placeholder="Jane Doe" />
+          <div class="signature-group">
+            <label>Full Name: <span class="required"></span></label>
+            <input
+              type="text"
+              name="namePrinted"
+              class="text-input"
+              placeholder="Jane Doe"
+            />
           </div>
 
           <div class="signature-group">
-            <label>Date: <span class="required">*</span></label>
-            <input type="date" name="signatureDate" class="date-input" required />
+            <label>Date: <span class="required"></span></label>
+            <input
+              type="date"
+              name="signatureDate"
+              class="date-input"
+              required
+            />
           </div>
-
-   
 
           <div class="guardian-section" id="guardianSection">
             <h3>Guardian Information (if applicable)</h3>
             <div class="signature-group">
               <label>Full Name:</label>
-              <input type="text" name="guardianNamePrinted" class="text-input" placeholder="If applicable" />
+              <input
+                type="text"
+                name="guardianNamePrinted"
+                class="text-input"
+                placeholder="If applicable"
+              />
             </div>
           </div>
         </section>
 
         <div class="form-actions">
-          <button type="button" id="resetBtn" class="btn-secondary">Reset Form</button>
-          <button type="submit" class="btn-primary">Submit Release</button>
+          <button type="button" id="resetBtn" class="btn-secondary btn">
+            Reset Form
+          </button>
+          <button type="submit" class="btn-primary btn">Submit Release</button>
         </div>
       </form>
     </div>

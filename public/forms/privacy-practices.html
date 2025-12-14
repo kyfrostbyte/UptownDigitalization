@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Privacy Practices Acknowledgement</title>
     <link rel="stylesheet" href="../styles/forms/privacy-practices.css" />
+    <link rel="stylesheet" href="../styles/common.css" />
   </head>
   <body>
     <div class="form-container">
@@ -18,24 +19,40 @@
         <section class="form-section">
           <div class="notice-box">
             <p class="notice-text">
-              I have received a copy of this office's Notice of Privacy Practices.
+              I have received a copy of this office's Notice of Privacy
+              Practices.
             </p>
           </div>
 
           <div class="signature-group">
             <label>Full Name</label>
-            <input type="text" name="namePrinted" class="text-input" placeholder="Jane Doe" required />
+            <input
+              type="text"
+              name="namePrinted"
+              class="text-input"
+              placeholder="Jane Doe"
+              required
+            />
           </div>
 
           <div class="signature-group">
             <label>Date:</label>
-            <input type="date" name="signatureDate" class="date-input" required />
+            <input
+              type="date"
+              name="signatureDate"
+              class="date-input"
+              required
+            />
           </div>
         </section>
 
         <div class="form-actions">
-          <button type="button" id="resetBtn" class="btn-secondary">Reset Form</button>
-          <button type="submit" class="btn-primary">Submit Acknowledgement</button>
+          <button type="button" id="resetBtn" class="btn-secondary btn">
+            Reset Form
+          </button>
+          <button type="submit" class="btn-primary btn">
+            Submit Acknowledgement
+          </button>
         </div>
       </form>
     </div>

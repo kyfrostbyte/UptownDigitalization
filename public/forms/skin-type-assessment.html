@@ -3,173 +3,325 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skin Type Assessment Test</title>
-    <link rel="stylesheet" href="../styles/forms/skin-type-assessment.css" />
+    <title>Skin Type Assessment</title>
+    <link rel="stylesheet" href="../../styles/forms/skin-type-assessment.css" />
+    <link rel="stylesheet" href="../styles/common.css" />
   </head>
   <body>
     <div class="form-container">
       <div class="form-header">
         <h1>Skin Type Assessment Test</h1>
-        <p>Complete all sections to determine your Fitzpatrick Skin Type</p>
+        <p>Complete all questions to determine your Fitzpatrick Skin Type</p>
       </div>
 
       <form id="skinAssessmentForm">
         <!-- Section I: Physical Characteristics -->
         <section class="form-section">
           <h2>Section I: Physical Characteristics</h2>
-          
+
           <div class="question-group">
-            <label class="question-label">What is the natural color of your eyes?</label>
+            <label class="question-label"
+              >What is the natural color of your eyes?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="eyes" value="0" required> Light blue, gray, green</label>
-              <label><input type="radio" name="eyes" value="1"> Blue, gray, green</label>
-              <label><input type="radio" name="eyes" value="2"> Blue</label>
-              <label><input type="radio" name="eyes" value="3"> Dark Brown</label>
-              <label><input type="radio" name="eyes" value="4"> Brownish Black</label>
+              <label
+                ><input type="radio" name="eyes" value="0" required /> Light
+                blue, gray, green</label
+              >
+              <label
+                ><input type="radio" name="eyes" value="1" /> Blue, gray,
+                green</label
+              >
+              <label><input type="radio" name="eyes" value="2" /> Blue</label>
+              <label
+                ><input type="radio" name="eyes" value="3" /> Dark Brown</label
+              >
+              <label
+                ><input type="radio" name="eyes" value="4" /> Brownish
+                Black</label
+              >
             </div>
           </div>
 
           <div class="question-group">
-            <label class="question-label">What is the natural color of your hair?</label>
+            <label class="question-label"
+              >What is the natural color of your hair?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="hair" value="0" required> Sandy Red</label>
-              <label><input type="radio" name="hair" value="1"> Blond</label>
-              <label><input type="radio" name="hair" value="2"> Chestnut/Dark Blond</label>
-              <label><input type="radio" name="hair" value="3"> Dark Brown</label>
-              <label><input type="radio" name="hair" value="4"> Black</label>
+              <label
+                ><input type="radio" name="hair" value="0" required /> Sandy
+                Red</label
+              >
+              <label><input type="radio" name="hair" value="1" /> Blond</label>
+              <label
+                ><input type="radio" name="hair" value="2" /> Chestnut/Dark
+                Blond</label
+              >
+              <label
+                ><input type="radio" name="hair" value="3" /> Dark Brown</label
+              >
+              <label><input type="radio" name="hair" value="4" /> Black</label>
             </div>
           </div>
 
           <div class="question-group">
-            <label class="question-label">What is the color of your skin (in non-sun exposed areas)?</label>
+            <label class="question-label"
+              >What is the color of your skin (in non-sun exposed areas)?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="skin" value="0" required> Reddish</label>
-              <label><input type="radio" name="skin" value="1"> Very Pale</label>
-              <label><input type="radio" name="skin" value="2"> Pale with beige tint</label>
-              <label><input type="radio" name="skin" value="3"> Light Brown</label>
-              <label><input type="radio" name="skin" value="4"> Dark Brown</label>
+              <label
+                ><input type="radio" name="skin" value="0" required />
+                Reddish</label
+              >
+              <label
+                ><input type="radio" name="skin" value="1" /> Very Pale</label
+              >
+              <label
+                ><input type="radio" name="skin" value="2" /> Pale with beige
+                tint</label
+              >
+              <label
+                ><input type="radio" name="skin" value="3" /> Light Brown</label
+              >
+              <label
+                ><input type="radio" name="skin" value="4" /> Dark Brown</label
+              >
             </div>
           </div>
 
           <div class="question-group">
-            <label class="question-label">Do you have freckles (in non-sun exposed areas)?</label>
+            <label class="question-label"
+              >Do you have freckles (in non-sun exposed areas)?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="freckles" value="0" required> Many</label>
-              <label><input type="radio" name="freckles" value="1"> Several</label>
-              <label><input type="radio" name="freckles" value="2"> Few</label>
-              <label><input type="radio" name="freckles" value="3"> Incidental</label>
-              <label><input type="radio" name="freckles" value="4"> None</label>
+              <label
+                ><input type="radio" name="freckles" value="0" required />
+                Many</label
+              >
+              <label
+                ><input type="radio" name="freckles" value="1" /> Several</label
+              >
+              <label
+                ><input type="radio" name="freckles" value="2" /> Few</label
+              >
+              <label
+                ><input type="radio" name="freckles" value="3" />
+                Incidental</label
+              >
+              <label
+                ><input type="radio" name="freckles" value="4" /> None</label
+              >
             </div>
-          </div>
-
-          <div class="section-score">
-            <strong>Section I Score: <span id="score1">0</span></strong>
           </div>
         </section>
 
         <!-- Section II: Sun Reaction -->
         <section class="form-section">
           <h2>Section II: Sun Reaction</h2>
-          
+
           <div class="question-group">
-            <label class="question-label">What happens if you stay in the sun too long?</label>
+            <label class="question-label"
+              >What happens if you stay in the sun too long?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="sunBurn" value="0" required> Painful redness, blistering and peeling</label>
-              <label><input type="radio" name="sunBurn" value="1"> Blistering followed by peeling</label>
-              <label><input type="radio" name="sunBurn" value="2"> Burn sometimes followed by peeling</label>
-              <label><input type="radio" name="sunBurn" value="3"> Rarely burns</label>
-              <label><input type="radio" name="sunBurn" value="4"> Never burns</label>
+              <label
+                ><input type="radio" name="sunBurn" value="0" required />
+                Painful redness, blistering and peeling</label
+              >
+              <label
+                ><input type="radio" name="sunBurn" value="1" /> Blistering
+                followed by peeling</label
+              >
+              <label
+                ><input type="radio" name="sunBurn" value="2" /> Burn sometimes
+                followed by peeling</label
+              >
+              <label
+                ><input type="radio" name="sunBurn" value="3" /> Rarely
+                burns</label
+              >
+              <label
+                ><input type="radio" name="sunBurn" value="4" /> Never
+                burns</label
+              >
             </div>
           </div>
 
           <div class="question-group">
-            <label class="question-label">To what degree do you turn brown?</label>
+            <label class="question-label"
+              >To what degree do you turn brown?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="tanDegree" value="0" required> Hardly or not at all</label>
-              <label><input type="radio" name="tanDegree" value="1"> Light color tan</label>
-              <label><input type="radio" name="tanDegree" value="2"> Reasonable tan</label>
-              <label><input type="radio" name="tanDegree" value="3"> Tan very easy</label>
-              <label><input type="radio" name="tanDegree" value="4"> Turn dark brown quickly</label>
+              <label
+                ><input type="radio" name="tanDegree" value="0" required />
+                Hardly or not at all</label
+              >
+              <label
+                ><input type="radio" name="tanDegree" value="1" /> Light color
+                tan</label
+              >
+              <label
+                ><input type="radio" name="tanDegree" value="2" /> Reasonable
+                tan</label
+              >
+              <label
+                ><input type="radio" name="tanDegree" value="3" /> Tan very
+                easy</label
+              >
+              <label
+                ><input type="radio" name="tanDegree" value="4" /> Turn dark
+                brown quickly</label
+              >
             </div>
           </div>
 
           <div class="question-group">
-            <label class="question-label">Do you turn brown within several hours after sun exposure?</label>
+            <label class="question-label"
+              >Do you turn brown within several hours after sun exposure?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="tanSpeed" value="0" required> Never</label>
-              <label><input type="radio" name="tanSpeed" value="1"> Seldom</label>
-              <label><input type="radio" name="tanSpeed" value="2"> Sometimes</label>
-              <label><input type="radio" name="tanSpeed" value="3"> Often</label>
-              <label><input type="radio" name="tanSpeed" value="4"> Always</label>
+              <label
+                ><input type="radio" name="tanSpeed" value="0" required />
+                Never</label
+              >
+              <label
+                ><input type="radio" name="tanSpeed" value="1" /> Seldom</label
+              >
+              <label
+                ><input type="radio" name="tanSpeed" value="2" />
+                Sometimes</label
+              >
+              <label
+                ><input type="radio" name="tanSpeed" value="3" /> Often</label
+              >
+              <label
+                ><input type="radio" name="tanSpeed" value="4" /> Always</label
+              >
             </div>
           </div>
 
           <div class="question-group">
-            <label class="question-label">How does your face react to the sun?</label>
+            <label class="question-label"
+              >How does your face react to the sun?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="faceReaction" value="0" required> Very sensitive</label>
-              <label><input type="radio" name="faceReaction" value="1"> Sensitive</label>
-              <label><input type="radio" name="faceReaction" value="2"> Normal</label>
-              <label><input type="radio" name="faceReaction" value="3"> Very Resistant</label>
-              <label><input type="radio" name="faceReaction" value="4"> Never had a problem</label>
+              <label
+                ><input type="radio" name="faceReaction" value="0" required />
+                Very sensitive</label
+              >
+              <label
+                ><input type="radio" name="faceReaction" value="1" />
+                Sensitive</label
+              >
+              <label
+                ><input type="radio" name="faceReaction" value="2" />
+                Normal</label
+              >
+              <label
+                ><input type="radio" name="faceReaction" value="3" /> Very
+                Resistant</label
+              >
+              <label
+                ><input type="radio" name="faceReaction" value="4" /> Never had
+                a problem</label
+              >
             </div>
-          </div>
-
-          <div class="section-score">
-            <strong>Section II Score: <span id="score2">0</span></strong>
           </div>
         </section>
 
         <!-- Section III: Sun Exposure History -->
         <section class="form-section">
           <h2>Section III: Sun Exposure History</h2>
-          
+
           <div class="question-group">
-            <label class="question-label">When did you last expose your body to the sun (or artificial sunlamps/tanning cream)?</label>
+            <label class="question-label"
+              >When did you last expose your body to the sun (or artificial
+              sunlamps/tanning cream)?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="lastExposure" value="0" required> More than 3 months ago</label>
-              <label><input type="radio" name="lastExposure" value="1"> 2-3 months ago</label>
-              <label><input type="radio" name="lastExposure" value="2"> 1-2 months ago</label>
-              <label><input type="radio" name="lastExposure" value="3"> Less than a month ago</label>
-              <label><input type="radio" name="lastExposure" value="4"> Less than 2 weeks ago</label>
+              <label
+                ><input type="radio" name="lastExposure" value="0" required />
+                More than 3 months ago</label
+              >
+              <label
+                ><input type="radio" name="lastExposure" value="1" /> 2-3 months
+                ago</label
+              >
+              <label
+                ><input type="radio" name="lastExposure" value="2" /> 1-2 months
+                ago</label
+              >
+              <label
+                ><input type="radio" name="lastExposure" value="3" /> Less than
+                a month ago</label
+              >
+              <label
+                ><input type="radio" name="lastExposure" value="4" /> Less than
+                2 weeks ago</label
+              >
             </div>
           </div>
 
           <div class="question-group">
-            <label class="question-label">Did you expose the area(s) you wish to have treated to the sun?</label>
+            <label class="question-label"
+              >Did you expose the area(s) you wish to have treated to the
+              sun?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="areaExposure" value="0" required> Never</label>
-              <label><input type="radio" name="areaExposure" value="1"> Hardly ever</label>
-              <label><input type="radio" name="areaExposure" value="2"> Sometimes</label>
-              <label><input type="radio" name="areaExposure" value="3"> Often</label>
-              <label><input type="radio" name="areaExposure" value="4"> Always</label>
+              <label
+                ><input type="radio" name="areaExposure" value="0" required />
+                Never</label
+              >
+              <label
+                ><input type="radio" name="areaExposure" value="1" /> Hardly
+                ever</label
+              >
+              <label
+                ><input type="radio" name="areaExposure" value="2" />
+                Sometimes</label
+              >
+              <label
+                ><input type="radio" name="areaExposure" value="3" />
+                Often</label
+              >
+              <label
+                ><input type="radio" name="areaExposure" value="4" />
+                Always</label
+              >
             </div>
-          </div>
-
-          <div class="section-score">
-            <strong>Section III Score: <span id="score3">0</span></strong>
           </div>
         </section>
 
-        <!-- Total Score and Result -->
-        <div class="results-section">
+        <!-- Calculate Score Button -->
+        <div class="form-actions">
+          <button type="button" id="calculateBtn" class="btn-primary btn">
+            Calculate Score
+          </button>
+        </div>
+
+        <!-- Results Section (hidden initially) -->
+        <div id="resultsSection" class="results-section" style="display: none">
           <div class="total-score">
             <h2>Total Score: <span id="totalScore">0</span></h2>
           </div>
-          
+
           <div class="skin-type-result">
             <h3>Fitzpatrick Skin Type: <span id="skinType">-</span></h3>
             <p id="skinTypeDescription"></p>
           </div>
-        </div>
 
-        <div class="form-actions">
-          <button type="button" id="resetBtn" class="btn-secondary">Reset Form</button>
-          <button type="submit" class="btn-primary">Submit Assessment</button>
+          <!-- Submit Button (shown after calculation) -->
+          <div class="form-actions" style="margin-top: 2rem">
+            <button type="submit" class="btn-primary btn">
+              Submit Assessment
+            </button>
+          </div>
         </div>
       </form>
     </div>
-
-    <script src="../scripts/forms/skin-assessment.js"></script>
+    <script
+      type="module"
+      src="../scripts/forms/skin-type-assessment.js"
+    ></script>
   </body>
 </html>

@@ -5,7 +5,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
   background: #f5f7fa;
   color: #333;
   line-height: 1.6;
@@ -23,7 +24,7 @@ header {
 
 header h1 {
   font-size: 2rem;
-  color: #2c3e50;
+  color: #363642;
   font-weight: 600;
 }
 
@@ -38,7 +39,7 @@ table {
 }
 
 thead {
-  background: #6bd2ff;
+  background: #346cb0;
   color: white;
 }
 
@@ -46,7 +47,7 @@ thead th {
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -71,7 +72,7 @@ tbody td {
 
 /* Manage Button */
 .manage-btn {
-  background: #6bd2ff;
+  background: #346cb0;
   border: none;
   padding: 0.5rem;
   border-radius: 6px;
@@ -84,7 +85,7 @@ tbody td {
 }
 
 .manage-btn:hover {
-  background: #4fc3f7;
+  background: #2b5a92;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(107, 210, 255, 0.3);
 }
@@ -111,8 +112,12 @@ tbody td {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
@@ -204,14 +209,14 @@ tbody td {
 
 .forms-list li:hover {
   background: #f8f9fa;
-  border-color: #6bd2ff;
+  border-color: #346cb0;
 }
 
 .forms-list input[type="checkbox"] {
   width: 20px;
   height: 20px;
   cursor: pointer;
-  accent-color: #6bd2ff;
+  accent-color: #346cb0;
 }
 
 .forms-list label {
@@ -244,12 +249,12 @@ tbody td {
 }
 
 .btn-primary {
-  background: #6bd2ff;
+  background: #346cb0;
   color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #4fc3f7;
+  background: #2b5a92;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(107, 210, 255, 0.3);
 }
@@ -266,62 +271,6 @@ tbody td {
 
 .btn-secondary:hover {
   background: #d0d0d0;
-}
-
-.btn-copy {
-  background: #34c759;
-  color: white;
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
-}
-
-.btn-copy:hover {
-  background: #28a745;
-}
-
-/* URL Container */
-.url-container {
-  margin-top: 1.5rem;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-}
-
-.url-container label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #2c3e50;
-  font-size: 0.9rem;
-}
-
-.url-input-group {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.url-container input {
-  flex: 1;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
-  background: white;
-}
-
-.url-container input:focus {
-  outline: none;
-  border-color: #6bd2ff;
-  box-shadow: 0 0 0 3px rgba(107, 210, 255, 0.1);
-}
-
-.url-help-text {
-  margin-top: 0.75rem;
-  font-size: 0.85rem;
-  color: #666;
-  font-style: italic;
 }
 
 /* Responsive */
@@ -351,9 +300,5 @@ tbody td {
   .btn {
     width: 100%;
     justify-content: center;
-  }
-
-  .url-input-group {
-    flex-direction: column;
   }
 }

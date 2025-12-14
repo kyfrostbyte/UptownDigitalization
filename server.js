@@ -1,13 +1,23 @@
+// server.js
+
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const { nanoid } = require('nanoid');
 const path = require('path');
-require('dotenv').config();
 const app = express();
-
+require('dotenv').config();
 app.use(express.json());
 app.use(express.static('public'));
 
+
+
+// Twilio variables
+const twilio = require('twilio');
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
+
+const client = twilio(accountSid, authToken);
 const db = new sqlite3.Database('mydev.db');
 
 // Enable foreign keys
@@ -111,7 +121,7 @@ async function seedDatabase() {
       );
 
       const clientId = result.lastID;
-      const token = nanoid(8);
+      const token = nanoid(15);
 
       await dbRun(
         `INSERT INTO forms_status (token, client_id, purchase_agreement, medical_history, informed_consent, media_release, privacy_practices, skin_type_assessment, sent)
@@ -142,7 +152,7 @@ async function resetDatabase() {
     await dbRun('DROP TABLE IF EXISTS forms_status');
     await dbRun('DROP TABLE IF EXISTS clients');
     
-    console.log('✓ Tables dropped');
+    console.log('Tables dropped');
     
     // Re-enable foreign keys
     await dbRun('PRAGMA foreign_keys = ON');
@@ -150,7 +160,7 @@ async function resetDatabase() {
     await initializeTables();
     await seedDatabase();
     
-    console.log('✓ Database reset complete');
+    console.log('Database reset complete');
   } catch (err) {
     console.error('Error resetting database:', err);
     throw err;
@@ -180,7 +190,42 @@ async function resetDatabase() {
   }
 })();
 
-// API ENDPOINTS
+// ===================== API ENDPOINTS =====================
+
+// Twilio send forms link
+app.post('/send-forms', async (req, res) => {
+  const { clientName, phone, url } = req.body;
+
+  if (!phone) {
+    return res.status(400).json({ 
+      success: false, 
+      message: 'Phone number is required' 
+    });
+  }
+
+  try {
+    const smsMessage = `Hi ${clientName},\n\nPlease complete your forms using this secure link:\n\n${url}\n\nThank you!`;
+    
+    await client.messages.create({
+      body: smsMessage,
+      from: twilioPhone,
+      to: phone
+    });
+    
+    res.json({ 
+      success: true,
+      message: smsMessage
+    });
+
+  } catch (error) {
+    console.error('SMS Error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: error.message 
+    });
+  }
+});
+
 
 // Get all clients
 app.get('/clients', async (req, res) => {
@@ -218,7 +263,7 @@ app.post('/clients', async (req, res) => {
     );
 
     const clientId = result.lastID;
-    const token = nanoid(8);
+    const token = nanoid(15);
 
     await dbRun(
       `INSERT INTO forms_status (token, client_id, purchase_agreement, medical_history, informed_consent, privacy_practices, skin_type_assessment, media_release)
@@ -229,6 +274,8 @@ app.post('/clients', async (req, res) => {
     res.json({ id: clientId, token, success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
+    console.log(err)
+    console.log("Something wrong.")
   }
 });
 

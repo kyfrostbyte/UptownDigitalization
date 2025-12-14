@@ -4,51 +4,36 @@ const modal = document.getElementById("formsModal");
 const closeBtn = modal.querySelector(".close");
 const cancelBtn = document.getElementById("cancelBtn");
 const formsCheckboxForm = document.getElementById("formsCheckboxForm");
-const sentUrlContainer = document.getElementById("sentUrlContainer");
-const sentUrlInput = document.getElementById("sentUrl");
-const copyUrlBtn = document.getElementById("copyUrlBtn");
 const clientNameSpan = document.getElementById("clientName");
 
 let currentClientId = null;
 let currentClientToken = null;
 let currentClientName = "";
+let currentClientPhone = null;
 
 // Define forms matching the database columns
 const FORM_DEFINITIONS = {
   purchase_agreement: { label: "Purchase Agreement" },
   medical_history: { label: "Medical History" },
-  skin_type_assessment: {label: "Skin Type Assessment"},
+  skin_type_assessment: { label: "Skin Type Assessment" },
   informed_consent: { label: "Informed Consent" },
   privacy_practices: { label: "Privacy Practices" },
-  media_release: { label: "Media Release"}
+  media_release: { label: "Media Release" }
 };
 
 // Close modal handlers
 function closeModal() {
   modal.style.display = "none";
-  sentUrlContainer.style.display = "none";
   currentClientId = null;
   currentClientToken = null;
   currentClientName = "";
+  currentClientPhone = null;
 }
 
 closeBtn.onclick = closeModal;
 cancelBtn.onclick = closeModal;
 window.onclick = (e) => { 
   if (e.target === modal) closeModal(); 
-};
-
-// Copy URL to clipboard
-copyUrlBtn.onclick = () => {
-  sentUrlInput.select();
-  sentUrlInput.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(sentUrlInput.value).then(() => {
-    const originalText = copyUrlBtn.textContent;
-    copyUrlBtn.textContent = "Copied!";
-    setTimeout(() => {
-      copyUrlBtn.textContent = originalText;
-    }, 2000);
-  });
 };
 
 // Load clients
@@ -65,7 +50,7 @@ function loadClients() {
           <td>${c.email || 'N/A'}</td>
           <td>${c.phone || 'N/A'}</td>
           <td>
-            <button class="manage-btn" data-id="${c.id}" data-name="${c.first_name} ${c.last_name}" aria-label="Manage forms for ${c.first_name} ${c.last_name}">
+            <button class="manage-btn" data-id="${c.id}" data-name="${c.first_name} ${c.last_name}" data-phone="${c.phone || ''}" aria-label="Manage forms for ${c.first_name} ${c.last_name}">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                 <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
@@ -79,7 +64,11 @@ function loadClients() {
       // Attach event listeners to manage buttons
       document.querySelectorAll(".manage-btn").forEach(btn => {
         btn.addEventListener("click", () => {
-          openFormsModal(btn.dataset.id, btn.dataset.name);
+          openFormsModal(
+            btn.dataset.id, 
+            btn.dataset.name,
+            btn.dataset.phone
+          );
         });
       });
     })
@@ -90,13 +79,13 @@ function loadClients() {
 }
 
 // Open modal and load form checkboxes
-function openFormsModal(clientId, clientName) {
+function openFormsModal(clientId, clientName, phone) {
   currentClientId = clientId;
   currentClientName = clientName;
+  currentClientPhone = phone;
   clientNameSpan.textContent = clientName;
   
   formsList.innerHTML = "<li>Loading...</li>";
-  sentUrlContainer.style.display = "none";
   modal.style.display = "block";
 
   // Fetch the forms_status for this client
@@ -122,7 +111,6 @@ function openFormsModal(clientId, clientName) {
         checkbox.name = key;
         checkbox.value = key;
         
-        // Check the box if the DB value is true (1)
         if (formStatus[key] === 1) {
           checkbox.checked = true;
         }
@@ -142,7 +130,7 @@ function openFormsModal(clientId, clientName) {
     });
 }
 
-// Handle form submission - update database and generate URL
+// Handle form submission - update database and send via Twilio SMS
 formsCheckboxForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -151,9 +139,14 @@ formsCheckboxForm.addEventListener("submit", async (e) => {
     return;
   }
 
+  if (!currentClientPhone) {
+    alert("Error: No phone number found for this client");
+    return;
+  }
+
   const saveBtn = document.getElementById("saveFormsBtn");
   saveBtn.disabled = true;
-  saveBtn.textContent = "Saving...";
+  saveBtn.textContent = "Sending...";
 
   try {
     // Get all checkboxes
@@ -174,30 +167,40 @@ formsCheckboxForm.addEventListener("submit", async (e) => {
       });
     });
 
-    // Wait for all updates to complete
     await Promise.all(updatePromises);
 
-    // Generate and display the URL
+    // Send via Twilio SMS
     const url = `http://localhost:3000/pages/form-wizard.html?token=${encodeURIComponent(currentClientToken)}`;
-    sentUrlInput.value = url;
-    sentUrlContainer.style.display = "block";
     
-    // Auto-select the URL for easy copying
-    setTimeout(() => {
-      sentUrlInput.select();
-    }, 100);
+    const sendResponse = await fetch("/send-forms", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        clientName: currentClientName,
+        phone: currentClientPhone,
+        url: url
+      })
+    });
 
-    // Show success feedback
-    saveBtn.textContent = "Saved!";
+    if (!sendResponse.ok) {
+      throw new Error("Failed to send text message");
+    }
+
+    // Log text for demo purposes
+    const data = await sendResponse.json();
+    console.log(data.message);  // This is your full SMS text
+    
+    saveBtn.textContent = "Sent!";
     setTimeout(() => {
-      saveBtn.textContent = "Save & Generate Link";
+      closeModal();
+      saveBtn.textContent = "Save & Text Forms";
       saveBtn.disabled = false;
-    }, 2000);
+    }, 1500);
 
   } catch (err) {
-    console.error("Error saving forms:", err);
-    alert("Error saving forms. Please try again.");
-    saveBtn.textContent = "Save & Generate Link";
+    console.error("Error saving/sending forms:", err);
+    alert("Error saving or sending forms. Please try again.");
+    saveBtn.textContent = "Save & Text Forms";
     saveBtn.disabled = false;
   }
 });

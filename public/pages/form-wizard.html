@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles/forms/form-wizard.css">
-  <title>Form Wizard</title>
-</head>
-<body>
-  <div class="layout-grid" id="layoutGrid">
-    <header class="header">
-      <button id="navToggle" class="nav-toggle-btn" aria-label="Toggle navigation">☰</button>
-      <h1 id="formTitle">Welcome to the Form Wizard</h1>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Complete your assigned forms securely through our interactive form wizard"
+    />
+    <link rel="stylesheet" href="../styles/forms/form-wizard.css" />
+    <link rel="stylesheet" href="../styles/common.css" />
+    <title>Form Wizard - Complete Your Forms</title>
+  </head>
+  <body>
+    <div class="layout-grid" id="layoutGrid">
+      <header class="header">
+        <button
+          id="navToggle"
+          class="nav-toggle-btn"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+        <h1 id="formTitle">Uptown Laser Hair Removal</h1>
+      </header>
 
-    <nav class="side-nav" id="formNav" aria-label="Form navigation">
-      <!-- Nav links inserted dynamically -->
-    </nav>
+      <nav class="side-nav" id="formNav" aria-label="Form navigation">
+        <!-- Nav links are inserted with javascript, dynamic bc different clients have different forms-->
+      </nav>
 
-    <main class="main-content" id="formContainer">
-      <div id="landingPage">
-        <h2>Interactive Form Wizard</h2>
-        <p>Welcome! This wizard will guide you through completing the forms assigned to you. Click a form from the list below to begin.</p>
-        <div id="landingLinks"></div>
-      </div>
-    </main>
-  </div>
+      <main class="main-content" id="formContainer">
+        <div id="landingPage">
+          <h2>Interactive Form Wizard</h2>
+          <p>
+            Welcome! This wizard will guide you through completing the forms
+            assigned to you. Click a form from the list below to begin.
+          </p>
+          <div id="landingLinks"></div>
+        </div>
+      </main>
+    </div>
 
-  <script type="module" src="../scripts/forms/form-wizard.js"></script>
-  <script type="module" src="../scripts/forms/forms-common.js"></script>
-  <script type="module" src="../scripts/forms/medical-history.js"></script>
-</body>
+    <script type="module" src="../scripts/forms/form-wizard.js"></script>
+    <script type="module" src="../scripts/forms/forms-common.js"></script>
+    <script type="module" src="../scripts/forms/informed-consent.js"></script>
+    <script type="module" src="../scripts/forms/media-release.js"></script>
+    <script type="module" src="../scripts/forms/medical-history.js"></script>
+    <script type="module" src="../scripts/forms/privacy-practices.js"></script>
+    <script type="module" src="../scripts/forms/purchase-agreement.js"></script>
+    <script
+      type="module"
+      src="../scripts/forms/skin-type-assessment.js"
+    ></script>
+  </body>
 </html>

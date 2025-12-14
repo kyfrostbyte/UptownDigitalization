@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Medical History Form</title>
     <link rel="stylesheet" href="../styles/forms/medical-history.css" />
+    <link rel="stylesheet" href="../styles/common.css" />
   </head>
   <body>
     <div class="form-container">
@@ -40,7 +41,12 @@
             </div>
             <div class="form-group">
               <label class="required">Cell Phone</label>
-              <input type="tel" name="cellPhone" placeholder="555-123-4567" required />
+              <input
+                type="tel"
+                name="cellPhone"
+                placeholder="555-123-4567"
+                required
+              />
             </div>
             <div class="form-group full-width">
               <label class="required">Email</label>
@@ -56,11 +62,23 @@
             </div>
             <div class="form-group">
               <label class="required">State</label>
-              <input type="text" name="state" maxlength="2" placeholder="KY" required />
+              <input
+                type="text"
+                name="state"
+                maxlength="2"
+                placeholder="KY"
+                required
+              />
             </div>
             <div class="form-group">
               <label class="required">Zip Code</label>
-              <input type="text" name="zip" pattern="[0-9]{5}" placeholder="12345" required />
+              <input
+                type="text"
+                name="zip"
+                pattern="[0-9]{5}"
+                placeholder="12345"
+                required
+              />
             </div>
             <div class="form-group">
               <label>Occupation</label>
@@ -68,22 +86,37 @@
             </div>
             <div class="form-group">
               <label>Business Phone</label>
-              <input type="tel" name="businessPhone" placeholder="555-123-4567" />
+              <input
+                type="tel"
+                name="businessPhone"
+                placeholder="555-123-4567"
+              />
             </div>
           </div>
 
           <div class="form-group">
             <label>I identify my gender as:</label>
             <div class="radio-group">
-              <label><input type="radio" name="gender" value="male" /> Male</label>
-              <label><input type="radio" name="gender" value="female" /> Female</label>
-              <label><input type="radio" name="gender" value="other" /> Other</label>
+              <label
+                ><input type="radio" name="gender" value="male" /> Male</label
+              >
+              <label
+                ><input type="radio" name="gender" value="female" />
+                Female</label
+              >
+              <label
+                ><input type="radio" name="gender" value="other" /> Other</label
+              >
             </div>
           </div>
 
           <div class="form-group">
             <label>Preferred Pronouns</label>
-            <input type="text" name="pronouns" placeholder="e.g., he/him, she/her, they/them" />
+            <input
+              type="text"
+              name="pronouns"
+              placeholder="e.g., he/him, she/her, they/them"
+            />
           </div>
         </section>
 
@@ -106,8 +139,14 @@
             <div class="form-group">
               <label>Share medical info with this person?</label>
               <div class="radio-group">
-                <label><input type="radio" name="shareMedical" value="yes" /> Yes</label>
-                <label><input type="radio" name="shareMedical" value="no" /> No</label>
+                <label
+                  ><input type="radio" name="shareMedical" value="yes" />
+                  Yes</label
+                >
+                <label
+                  ><input type="radio" name="shareMedical" value="no" />
+                  No</label
+                >
               </div>
             </div>
           </div>
@@ -117,14 +156,37 @@
         <section class="form-section">
           <h2>How Did You Hear About Us?</h2>
           <div class="checkbox-grid">
-            <label><input type="checkbox" name="hearAbout" value="google" /> Google</label>
-            <label><input type="checkbox" name="hearAbout" value="facebook" /> Facebook</label>
-            <label><input type="checkbox" name="hearAbout" value="instagram" /> Instagram</label>
-            <label><input type="checkbox" name="hearAbout" value="youtube" /> YouTube</label>
-            <label><input type="checkbox" name="hearAbout" value="radio" /> Radio</label>
-            <label><input type="checkbox" name="hearAbout" value="tv" /> TV</label>
-            <label><input type="checkbox" name="hearAbout" value="friend" /> Friend/Family</label>
-            <label><input type="checkbox" name="hearAbout" value="physician" /> Physician Referral</label>
+            <label
+              ><input type="checkbox" name="hearAbout" value="google" />
+              Google</label
+            >
+            <label
+              ><input type="checkbox" name="hearAbout" value="facebook" />
+              Facebook</label
+            >
+            <label
+              ><input type="checkbox" name="hearAbout" value="instagram" />
+              Instagram</label
+            >
+            <label
+              ><input type="checkbox" name="hearAbout" value="youtube" />
+              YouTube</label
+            >
+            <label
+              ><input type="checkbox" name="hearAbout" value="radio" />
+              Radio</label
+            >
+            <label
+              ><input type="checkbox" name="hearAbout" value="tv" /> TV</label
+            >
+            <label
+              ><input type="checkbox" name="hearAbout" value="friend" />
+              Friend/Family</label
+            >
+            <label
+              ><input type="checkbox" name="hearAbout" value="physician" />
+              Physician Referral</label
+            >
           </div>
 
           <div class="conditional-field" data-trigger="friend">
@@ -140,17 +202,35 @@
           <div class="form-group">
             <label>How do you prefer to be contacted?</label>
             <div class="radio-group">
-              <label><input type="radio" name="contactPreference" value="phone" /> Phone</label>
-              <label><input type="radio" name="contactPreference" value="email" /> Email</label>
-              <label><input type="radio" name="contactPreference" value="text" /> Text</label>
+              <label
+                ><input type="radio" name="contactPreference" value="phone" />
+                Phone</label
+              >
+              <label
+                ><input type="radio" name="contactPreference" value="email" />
+                Email</label
+              >
+              <label
+                ><input type="radio" name="contactPreference" value="text" />
+                Text</label
+              >
             </div>
           </div>
 
           <div class="form-group">
-            <label>Would you like to receive special offers and promotions via email?</label>
+            <label
+              >Would you like to receive special offers and promotions via
+              email?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="receivePromotions" value="yes" /> Yes</label>
-              <label><input type="radio" name="receivePromotions" value="no" /> No</label>
+              <label
+                ><input type="radio" name="receivePromotions" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="receivePromotions" value="no" />
+                No</label
+              >
             </div>
           </div>
         </section>
@@ -159,10 +239,18 @@
         <section class="form-section">
           <h2>Previous Treatments</h2>
           <div class="form-group">
-            <label>Have you ever had laser treatments or cosmetic procedures?</label>
+            <label
+              >Have you ever had laser treatments or cosmetic procedures?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="previousTreatments" value="yes" /> Yes</label>
-              <label><input type="radio" name="previousTreatments" value="no" /> No</label>
+              <label
+                ><input type="radio" name="previousTreatments" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="previousTreatments" value="no" />
+                No</label
+              >
             </div>
           </div>
 
@@ -193,18 +281,36 @@
         <section class="form-section" data-gender="female">
           <h2>Women Only</h2>
           <div class="form-group">
-            <label>Are you trying to become pregnant, are pregnant, or lactating?</label>
+            <label
+              >Are you trying to become pregnant, are pregnant, or
+              lactating?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="pregnantStatus" value="yes" /> Yes</label>
-              <label><input type="radio" name="pregnantStatus" value="no" /> No</label>
+              <label
+                ><input type="radio" name="pregnantStatus" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="pregnantStatus" value="no" />
+                No</label
+              >
             </div>
           </div>
 
           <div class="form-group">
-            <label>During pregnancy did you ever experience facial hyperpigmentation or "pregnancy mask"?</label>
+            <label
+              >During pregnancy did you ever experience facial hyperpigmentation
+              or "pregnancy mask"?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="hyperpigmentation" value="yes" /> Yes</label>
-              <label><input type="radio" name="hyperpigmentation" value="no" /> No</label>
+              <label
+                ><input type="radio" name="hyperpigmentation" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="hyperpigmentation" value="no" />
+                No</label
+              >
             </div>
           </div>
         </section>
@@ -213,10 +319,17 @@
         <section class="form-section">
           <h2>About Your Skin</h2>
           <div class="form-group">
-            <label>Do you currently use skincare products as a daily regimen?</label>
+            <label
+              >Do you currently use skincare products as a daily regimen?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="useSkincare" value="yes" /> Yes</label>
-              <label><input type="radio" name="useSkincare" value="no" /> No</label>
+              <label
+                ><input type="radio" name="useSkincare" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="useSkincare" value="no" /> No</label
+              >
             </div>
           </div>
 
@@ -226,10 +339,19 @@
           </div>
 
           <div class="form-group">
-            <label>Are you currently under any other physician's care for your skin?</label>
+            <label
+              >Are you currently under any other physician's care for your
+              skin?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="physicianCare" value="yes" /> Yes</label>
-              <label><input type="radio" name="physicianCare" value="no" /> No</label>
+              <label
+                ><input type="radio" name="physicianCare" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="physicianCare" value="no" />
+                No</label
+              >
             </div>
           </div>
 
@@ -241,20 +363,68 @@
           <div class="form-group">
             <label>Have you ever used any of the following products?</label>
             <div class="checkbox-grid">
-              <label><input type="checkbox" name="skinProducts" value="retin-a" /> Retin-A</label>
-              <label><input type="checkbox" name="skinProducts" value="aha" /> AHA</label>
-              <label><input type="checkbox" name="skinProducts" value="hydroquinone" /> Hydroquinone</label>
+              <label
+                ><input type="checkbox" name="skinProducts" value="retin-a" />
+                Retin-A</label
+              >
+              <label
+                ><input type="checkbox" name="skinProducts" value="aha" />
+                AHA</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinProducts"
+                  value="hydroquinone"
+                />
+                Hydroquinone</label
+              >
             </div>
           </div>
 
           <div class="form-group">
             <label>Have you ever had any of the following treatments?</label>
             <div class="checkbox-grid">
-              <label><input type="checkbox" name="skinTreatments" value="chemical-peel" /> Chemical Peel</label>
-              <label><input type="checkbox" name="skinTreatments" value="laser-peel" /> Laser Peel</label>
-              <label><input type="checkbox" name="skinTreatments" value="glycolic-peel" /> Glycolic Peel</label>
-              <label><input type="checkbox" name="skinTreatments" value="microdermabrasion" /> Microdermabrasion</label>
-              <label><input type="checkbox" name="skinTreatments" value="cosmetic-surgery" /> Cosmetic Surgery</label>
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinTreatments"
+                  value="chemical-peel"
+                />
+                Chemical Peel</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinTreatments"
+                  value="laser-peel"
+                />
+                Laser Peel</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinTreatments"
+                  value="glycolic-peel"
+                />
+                Glycolic Peel</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinTreatments"
+                  value="microdermabrasion"
+                />
+                Microdermabrasion</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinTreatments"
+                  value="cosmetic-surgery"
+                />
+                Cosmetic Surgery</label
+              >
             </div>
           </div>
 
@@ -266,8 +436,14 @@
           <div class="form-group">
             <label>Injectables: Have you been treated with:</label>
             <div class="checkbox-grid">
-              <label><input type="checkbox" name="injectables" value="botox" /> Botox</label>
-              <label><input type="checkbox" name="injectables" value="fillers" /> Fillers</label>
+              <label
+                ><input type="checkbox" name="injectables" value="botox" />
+                Botox</label
+              >
+              <label
+                ><input type="checkbox" name="injectables" value="fillers" />
+                Fillers</label
+              >
             </div>
           </div>
 
@@ -277,10 +453,17 @@
           </div>
 
           <div class="form-group">
-            <label>Do you ever use hair removal creams or waxes on your face?</label>
+            <label
+              >Do you ever use hair removal creams or waxes on your face?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="hairRemoval" value="yes" /> Yes</label>
-              <label><input type="radio" name="hairRemoval" value="no" /> No</label>
+              <label
+                ><input type="radio" name="hairRemoval" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="hairRemoval" value="no" /> No</label
+              >
             </div>
           </div>
 
@@ -290,17 +473,30 @@
           </div>
 
           <div class="form-group">
-            <label>Are you willing to wear sun protection products all day, every day?</label>
+            <label
+              >Are you willing to wear sun protection products all day, every
+              day?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="sunProtection" value="yes" /> Yes</label>
-              <label><input type="radio" name="sunProtection" value="no" /> No</label>
+              <label
+                ><input type="radio" name="sunProtection" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="sunProtection" value="no" />
+                No</label
+              >
             </div>
           </div>
 
           <div class="form-group">
-            <label>Do you consume more than 2 alcoholic beverages per day?</label>
+            <label
+              >Do you consume more than 2 alcoholic beverages per day?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="alcohol" value="yes" /> Yes</label>
+              <label
+                ><input type="radio" name="alcohol" value="yes" /> Yes</label
+              >
               <label><input type="radio" name="alcohol" value="no" /> No</label>
             </div>
           </div>
@@ -317,17 +513,34 @@
           <div class="form-group">
             <label>How would you describe your general health?</label>
             <div class="radio-group">
-              <label><input type="radio" name="generalHealth" value="good" /> Good</label>
-              <label><input type="radio" name="generalHealth" value="fair" /> Fair</label>
-              <label><input type="radio" name="generalHealth" value="poor" /> Poor</label>
+              <label
+                ><input type="radio" name="generalHealth" value="good" />
+                Good</label
+              >
+              <label
+                ><input type="radio" name="generalHealth" value="fair" />
+                Fair</label
+              >
+              <label
+                ><input type="radio" name="generalHealth" value="poor" />
+                Poor</label
+              >
             </div>
           </div>
 
           <div class="form-group">
-            <label>Have you had a major illness or been hospitalized within the last 5 years?</label>
+            <label
+              >Have you had a major illness or been hospitalized within the last
+              5 years?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="hospitalized" value="yes" /> Yes</label>
-              <label><input type="radio" name="hospitalized" value="no" /> No</label>
+              <label
+                ><input type="radio" name="hospitalized" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="hospitalized" value="no" /> No</label
+              >
             </div>
           </div>
 
@@ -337,10 +550,17 @@
           </div>
 
           <div class="form-group">
-            <label>Do you have any medicine/environmental allergies or skin sensitivities?</label>
+            <label
+              >Do you have any medicine/environmental allergies or skin
+              sensitivities?</label
+            >
             <div class="radio-group">
-              <label><input type="radio" name="allergies" value="yes" /> Yes</label>
-              <label><input type="radio" name="allergies" value="no" /> No</label>
+              <label
+                ><input type="radio" name="allergies" value="yes" /> Yes</label
+              >
+              <label
+                ><input type="radio" name="allergies" value="no" /> No</label
+              >
             </div>
           </div>
 
@@ -352,10 +572,17 @@
           <div class="form-group">
             <label>Do you currently take any oral medications?</label>
             <div class="radio-group">
-              <label><input type="radio" name="oralMeds" value="yes" /> Yes</label>
-              <label><input type="radio" name="oralMeds" value="no" /> No</label>
+              <label
+                ><input type="radio" name="oralMeds" value="yes" /> Yes</label
+              >
+              <label
+                ><input type="radio" name="oralMeds" value="no" /> No</label
+              >
             </div>
-            <p class="help-text">Includes oral hormones, birth control pills, antibiotics, blood pressure meds, etc.</p>
+            <p class="help-text">
+              Includes oral hormones, birth control pills, antibiotics, blood
+              pressure meds, etc.
+            </p>
           </div>
 
           <div class="conditional-field" data-trigger="oralMeds">
@@ -366,10 +593,18 @@
           <div class="form-group">
             <label>Do you use any topical medications?</label>
             <div class="radio-group">
-              <label><input type="radio" name="topicalMeds" value="yes" /> Yes</label>
-              <label><input type="radio" name="topicalMeds" value="no" /> No</label>
+              <label
+                ><input type="radio" name="topicalMeds" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="topicalMeds" value="no" /> No</label
+              >
             </div>
-            <p class="help-text">Includes Retin-A, Hydroquinone, Benzoyl Peroxide, antibiotics, Metrogel, Efudex, Cortisone, etc.</p>
+            <p class="help-text">
+              Includes Retin-A, Hydroquinone, Benzoyl Peroxide, antibiotics,
+              Metrogel, Efudex, Cortisone, etc.
+            </p>
           </div>
 
           <div class="conditional-field" data-trigger="topicalMeds">
@@ -385,39 +620,60 @@
           <div class="form-group">
             <label>Do you go to tanning beds?</label>
             <div class="radio-group">
-              <label><input type="radio" name="tanningBeds" value="yes" /> Yes</label>
-              <label><input type="radio" name="tanningBeds" value="no" /> No</label>
+              <label
+                ><input type="radio" name="tanningBeds" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="tanningBeds" value="no" /> No</label
+              >
             </div>
           </div>
 
           <div class="form-group">
             <label>Do you use self-tanner or bronzer?</label>
             <div class="radio-group">
-              <label><input type="radio" name="selfTanner" value="yes" /> Yes</label>
-              <label><input type="radio" name="selfTanner" value="no" /> No</label>
+              <label
+                ><input type="radio" name="selfTanner" value="yes" /> Yes</label
+              >
+              <label
+                ><input type="radio" name="selfTanner" value="no" /> No</label
+              >
             </div>
           </div>
 
           <div class="form-group">
             <label>Are you on any long-term antibiotics?</label>
             <div class="radio-group">
-              <label><input type="radio" name="longTermAntibiotics" value="yes" /> Yes</label>
-              <label><input type="radio" name="longTermAntibiotics" value="no" /> No</label>
+              <label
+                ><input type="radio" name="longTermAntibiotics" value="yes" />
+                Yes</label
+              >
+              <label
+                ><input type="radio" name="longTermAntibiotics" value="no" />
+                No</label
+              >
             </div>
           </div>
 
           <div class="form-group">
             <label>Have you used Accutane in the last 6 months?</label>
             <div class="radio-group">
-              <label><input type="radio" name="accutane" value="yes" /> Yes</label>
-              <label><input type="radio" name="accutane" value="no" /> No</label>
+              <label
+                ><input type="radio" name="accutane" value="yes" /> Yes</label
+              >
+              <label
+                ><input type="radio" name="accutane" value="no" /> No</label
+              >
             </div>
           </div>
 
           <div class="form-group">
             <label>Do you have tattoos, including permanent makeup?</label>
             <div class="radio-group">
-              <label><input type="radio" name="tattoos" value="yes" /> Yes</label>
+              <label
+                ><input type="radio" name="tattoos" value="yes" /> Yes</label
+              >
               <label><input type="radio" name="tattoos" value="no" /> No</label>
             </div>
           </div>
@@ -431,37 +687,142 @@
         <!-- Medical Conditions -->
         <section class="form-section">
           <h2>Medical Conditions</h2>
-          <p class="section-note">Indicate if you have ever had any of the following:</p>
+          <p class="section-note">
+            Indicate if you have ever had any of the following:
+          </p>
           <div class="checkbox-grid">
-            <label><input type="checkbox" name="conditions" value="aids-hiv" /> AIDS/HIV</label>
-            <label><input type="checkbox" name="conditions" value="anemia" /> Anemia</label>
-            <label><input type="checkbox" name="conditions" value="autoimmune" /> Autoimmune Disorders</label>
-            <label><input type="checkbox" name="conditions" value="bleeding" /> Bleeding Disorders</label>
-            <label><input type="checkbox" name="conditions" value="cold-sores" /> Cold Sores</label>
-            <label><input type="checkbox" name="conditions" value="dermatitis" /> Dermatitis</label>
-            <label><input type="checkbox" name="conditions" value="diabetes" /> Diabetes</label>
-            <label><input type="checkbox" name="conditions" value="ear-sinus" /> Ear/Sinus Trouble</label>
-            <label><input type="checkbox" name="conditions" value="eczema" /> Eczema</label>
-            <label><input type="checkbox" name="conditions" value="epilepsy" /> Epilepsy/Seizures</label>
-            <label><input type="checkbox" name="conditions" value="facial-surgery" /> Facial Surgery/Implants</label>
-            <label><input type="checkbox" name="conditions" value="heart-condition" /> Heart Condition</label>
-            <label><input type="checkbox" name="conditions" value="heart-disease" /> Heart Disease</label>
-            <label><input type="checkbox" name="conditions" value="hepatitis-a" /> Hepatitis A</label>
-            <label><input type="checkbox" name="conditions" value="hepatitis-b" /> Hepatitis B</label>
-            <label><input type="checkbox" name="conditions" value="hepatitis-c" /> Hepatitis C</label>
-            <label><input type="checkbox" name="conditions" value="herpes-genital" /> Herpes (Genital)</label>
-            <label><input type="checkbox" name="conditions" value="hormone" /> Hormone Disorders</label>
-            <label><input type="checkbox" name="conditions" value="jaundice" /> Jaundice/Liver Issue</label>
-            <label><input type="checkbox" name="conditions" value="keloids" /> Keloids</label>
-            <label><input type="checkbox" name="conditions" value="lupus" /> Lupus</label>
-            <label><input type="checkbox" name="conditions" value="methemoglobinemia" /> Methemoglobinemia</label>
-            <label><input type="checkbox" name="conditions" value="nervous" /> Nervous Disorder</label>
-            <label><input type="checkbox" name="conditions" value="pcos" /> PCOS</label>
-            <label><input type="checkbox" name="conditions" value="phlebitis" /> Phlebitis</label>
-            <label><input type="checkbox" name="conditions" value="psychiatric" /> Psychiatric Care</label>
-            <label><input type="checkbox" name="conditions" value="respiratory" /> Respiratory Condition</label>
-            <label><input type="checkbox" name="conditions" value="rosacea" /> Rosacea</label>
-            <label><input type="checkbox" name="conditions" value="venereal" /> Venereal Disease</label>
+            <label
+              ><input type="checkbox" name="conditions" value="aids-hiv" />
+              AIDS/HIV</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="anemia" />
+              Anemia</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="autoimmune" />
+              Autoimmune Disorders</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="bleeding" />
+              Bleeding Disorders</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="cold-sores" />
+              Cold Sores</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="dermatitis" />
+              Dermatitis</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="diabetes" />
+              Diabetes</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="ear-sinus" />
+              Ear/Sinus Trouble</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="eczema" />
+              Eczema</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="epilepsy" />
+              Epilepsy/Seizures</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="conditions"
+                value="facial-surgery"
+              />
+              Facial Surgery/Implants</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="conditions"
+                value="heart-condition"
+              />
+              Heart Condition</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="heart-disease" />
+              Heart Disease</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="hepatitis-a" />
+              Hepatitis A</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="hepatitis-b" />
+              Hepatitis B</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="hepatitis-c" />
+              Hepatitis C</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="conditions"
+                value="herpes-genital"
+              />
+              Herpes (Genital)</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="hormone" />
+              Hormone Disorders</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="jaundice" />
+              Jaundice/Liver Issue</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="keloids" />
+              Keloids</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="lupus" />
+              Lupus</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                name="conditions"
+                value="methemoglobinemia"
+              />
+              Methemoglobinemia</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="nervous" />
+              Nervous Disorder</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="pcos" />
+              PCOS</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="phlebitis" />
+              Phlebitis</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="psychiatric" />
+              Psychiatric Care</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="respiratory" />
+              Respiratory Condition</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="rosacea" />
+              Rosacea</label
+            >
+            <label
+              ><input type="checkbox" name="conditions" value="venereal" />
+              Venereal Disease</label
+            >
           </div>
 
           <div class="form-group">
@@ -476,10 +837,30 @@
           <div class="form-group">
             <label>Have you ever had skin cancer or pre-cancer?</label>
             <div class="checkbox-grid">
-              <label><input type="checkbox" name="skinCancer" value="basel-cell" /> Basel Cell</label>
-              <label><input type="checkbox" name="skinCancer" value="dysplastic-nevus" /> Dysplastic Nevus</label>
-              <label><input type="checkbox" name="skinCancer" value="squamous-cell" /> Squamous Cell</label>
-              <label><input type="checkbox" name="skinCancer" value="melanoma" /> Melanoma</label>
+              <label
+                ><input type="checkbox" name="skinCancer" value="basel-cell" />
+                Basel Cell</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinCancer"
+                  value="dysplastic-nevus"
+                />
+                Dysplastic Nevus</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="skinCancer"
+                  value="squamous-cell"
+                />
+                Squamous Cell</label
+              >
+              <label
+                ><input type="checkbox" name="skinCancer" value="melanoma" />
+                Melanoma</label
+              >
             </div>
           </div>
 
@@ -500,40 +881,73 @@
         <!-- Treatment Priorities -->
         <section class="form-section">
           <h2>Your Treatment Wish List</h2>
-          <p class="section-note">List your desired treatment areas in order of priority</p>
-          <p class="help-text">Potential areas: underarms, bikini line, full bikini/Brazilian, legs, chin, upper lip, neck, unibrow, sideburns, full face and neck, belly trail, arms, hands, chest, abdomen, back, buttocks, neckline, ears</p>
+          <p class="section-note">
+            List your desired treatment areas in order of priority
+          </p>
+          <p class="help-text">
+            Potential areas: underarms, bikini line, full bikini/Brazilian,
+            legs, chin, upper lip, neck, unibrow, sideburns, full face and neck,
+            belly trail, arms, hands, chest, abdomen, back, buttocks, neckline,
+            ears
+          </p>
 
           <div class="priority-list">
             <div class="priority-item">
               <span>1</span>
-              <input type="text" name="priority1" placeholder="First priority treatment area" />
+              <input
+                type="text"
+                name="priority1"
+                placeholder="First priority treatment area"
+              />
             </div>
             <div class="priority-item">
               <span>2</span>
-              <input type="text" name="priority2" placeholder="Second priority treatment area" />
+              <input
+                type="text"
+                name="priority2"
+                placeholder="Second priority treatment area"
+              />
             </div>
             <div class="priority-item">
               <span>3</span>
-              <input type="text" name="priority3" placeholder="Third priority treatment area" />
+              <input
+                type="text"
+                name="priority3"
+                placeholder="Third priority treatment area"
+              />
             </div>
             <div class="priority-item">
               <span>4</span>
-              <input type="text" name="priority4" placeholder="Fourth priority treatment area" />
+              <input
+                type="text"
+                name="priority4"
+                placeholder="Fourth priority treatment area"
+              />
             </div>
             <div class="priority-item">
               <span>5</span>
-              <input type="text" name="priority5" placeholder="Fifth priority treatment area" />
+              <input
+                type="text"
+                name="priority5"
+                placeholder="Fifth priority treatment area"
+              />
             </div>
             <div class="priority-item">
               <span>6</span>
-              <input type="text" name="priority6" placeholder="Sixth priority treatment area" />
+              <input
+                type="text"
+                name="priority6"
+                placeholder="Sixth priority treatment area"
+              />
             </div>
           </div>
         </section>
 
         <div class="form-actions">
-          <button type="button" id="resetBtn" class="btn-secondary">Reset Form</button>
-          <button type="submit" class="btn-primary">Submit Form</button>
+          <button type="button" id="resetBtn" class="btn-secondary btn">
+            Reset Form
+          </button>
+          <button type="submit" class="btn-primary btn">Submit Form</button>
         </div>
       </form>
     </div>
