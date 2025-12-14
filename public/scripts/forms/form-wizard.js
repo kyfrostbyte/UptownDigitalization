@@ -291,7 +291,7 @@ async function initializeWizard() {
     clientForms.forEach((key) => {
       const formDef = FORM_DEFINITIONS[key];
 
-      // Create nav link
+      // Create nav links
       const link = document.createElement("a");
       link.href = "#";
       link.dataset.formKey = key;
@@ -313,7 +313,7 @@ async function initializeWizard() {
 
       nav.appendChild(link);
 
-      // Create landing page button WITH icon
+      // Create landing page buttons
       const btn = document.createElement("button");
       btn.classList.add("landing-btn");
 
